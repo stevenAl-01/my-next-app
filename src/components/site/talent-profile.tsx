@@ -43,7 +43,7 @@ export function TalentProfile({
     <div className="space-y-6">
       <Link
         href="/talents"
-        className="inline-flex items-center gap-2 text-sm text-[var(--app-muted)] transition hover:text-cyan-300"
+        className="inline-flex items-center gap-2 text-sm text-[var(--app-muted)] transition hover:accent-text"
       >
         <ArrowLeft className="h-4 w-4" />
         {lang === "id" ? "Kembali ke direktori talent" : "Back to talent directory"}
@@ -70,7 +70,7 @@ export function TalentProfile({
           <>
             <a
               href={`mailto:${talent.contactEmail}`}
-              className="inline-flex items-center gap-2 rounded-full bg-cyan-300 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200"
+              className="toolbar-primary gap-2 text-sm"
             >
               <Mail className="h-4 w-4" />
               {lang === "id" ? "Hubungi Talent" : "Contact Talent"}
@@ -79,7 +79,7 @@ export function TalentProfile({
               href={`https://wa.me/${talent.contactPhone.replace(/\D/g, "")}`}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[var(--app-border)] px-4 py-2 text-sm transition hover:border-cyan-300/40 hover:text-cyan-300"
+              className="toolbar-action gap-2 text-sm"
             >
               <Phone className="h-4 w-4" />
               {lang === "id" ? "Shortlist Talent" : "Shortlist Talent"}
@@ -140,7 +140,7 @@ export function TalentProfile({
                   <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
                     {dict.labels.cyberRange}
                   </p>
-                  <p className="mt-2 text-sm font-medium text-cyan-300">{talent.cyberRangeExp}</p>
+                  <p className="accent-text mt-2 text-sm font-medium">{talent.cyberRangeExp}</p>
                 </div>
               </div>
               <div>
@@ -179,29 +179,43 @@ export function TalentProfile({
                 <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
                   {lang === "id" ? "Kesiapan kontribusi" : "Contribution readiness"}
                 </p>
-                <p className="mt-2 text-sm font-medium text-cyan-300">{availabilityLabel}</p>
+                <p className="accent-text mt-2 text-sm font-medium">{availabilityLabel}</p>
               </div>
-              <div className="space-y-3 text-sm text-[var(--app-muted)]">
-                <p className="inline-flex items-center gap-2">
-                  <Building2 className="h-4 w-4 text-cyan-300" />
-                  {campusName}
-                </p>
-                <p className="inline-flex items-center gap-2">
-                  <MapPinned className="h-4 w-4 text-cyan-300" />
-                  {region}
-                </p>
-                <p className="inline-flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-cyan-300" />
-                  {talent.contactEmail}
-                </p>
-                <p className="inline-flex items-center gap-2">
-                  <Phone className="h-4 w-4 text-cyan-300" />
-                  {talent.contactPhone}
-                </p>
-                <p className="inline-flex items-center gap-2">
-                  <BriefcaseBusiness className="h-4 w-4 text-cyan-300" />
-                  {readinessLabel}
-                </p>
+              <div className="grid gap-3">
+                <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                    {lang === "id" ? "Afiliasi kampus" : "Campus affiliation"}
+                  </p>
+                  <div className="mt-3 space-y-3 text-sm">
+                    <p className="flex items-start gap-3 text-[var(--app-fg)]">
+                      <Building2 className="accent-text mt-0.5 h-4 w-4 shrink-0" />
+                      <span>{campusName}</span>
+                    </p>
+                    <p className="flex items-start gap-3 text-[var(--app-muted)]">
+                      <MapPinned className="accent-text mt-0.5 h-4 w-4 shrink-0" />
+                      <span>{region}</span>
+                    </p>
+                    <p className="flex items-start gap-3 text-[var(--app-fg)]">
+                      <BriefcaseBusiness className="accent-text mt-0.5 h-4 w-4 shrink-0" />
+                      <span>{readinessLabel}</span>
+                    </p>
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                    {lang === "id" ? "Kontak cepat" : "Quick contact"}
+                  </p>
+                  <div className="mt-3 space-y-3 text-sm">
+                    <p className="flex items-start gap-3 text-[var(--app-fg)]">
+                      <Mail className="accent-text mt-0.5 h-4 w-4 shrink-0" />
+                      <span className="break-all">{talent.contactEmail}</span>
+                    </p>
+                    <p className="flex items-start gap-3 text-[var(--app-fg)]">
+                      <Phone className="accent-text mt-0.5 h-4 w-4 shrink-0" />
+                      <span>{talent.contactPhone}</span>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           }

@@ -35,7 +35,7 @@ export function ExpertProfile({
     <div className="space-y-6">
       <Link
         href="/experts"
-        className="inline-flex items-center gap-2 text-sm text-[var(--app-muted)] transition hover:text-cyan-300"
+        className="inline-flex items-center gap-2 text-sm text-[var(--app-muted)] transition hover:accent-text"
       >
         <ArrowLeft className="h-4 w-4" />
         {lang === "id" ? "Kembali ke direktori expert" : "Back to expert directory"}
@@ -62,7 +62,7 @@ export function ExpertProfile({
           <>
             <a
               href={`mailto:${expert.contactEmail}`}
-              className="inline-flex items-center gap-2 rounded-full bg-cyan-300 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200"
+              className="toolbar-primary gap-2 text-sm"
             >
               <Mail className="h-4 w-4" />
               {lang === "id" ? "Hubungi Expert" : "Contact Expert"}
@@ -71,7 +71,7 @@ export function ExpertProfile({
               href={`https://wa.me/${expert.contactPhone.replace(/\D/g, "")}`}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[var(--app-border)] px-4 py-2 text-sm transition hover:border-cyan-300/40 hover:text-cyan-300"
+              className="toolbar-action gap-2 text-sm"
             >
               <Phone className="h-4 w-4" />
               {lang === "id" ? "Ajukan Kolaborasi" : "Propose Collaboration"}
@@ -129,10 +129,10 @@ export function ExpertProfile({
                   <p className="mt-2 text-sm font-medium">{campusName}</p>
                 </div>
                 <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
-                    {dict.labels.skkni}
-                  </p>
-                  <p className="mt-2 text-sm font-medium text-cyan-300">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                  {dict.labels.skkni}
+                </p>
+                  <p className="accent-text mt-2 text-sm font-medium">
                     {expert.skkniStatus === "certified" ? dict.labels.certified : dict.labels.inProgress}
                   </p>
                 </div>
@@ -173,25 +173,39 @@ export function ExpertProfile({
                 <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
                   {lang === "id" ? "Status ketersediaan" : "Availability status"}
                 </p>
-                <p className="mt-2 text-sm font-medium text-cyan-300">{availabilityLabel}</p>
+                <p className="accent-text mt-2 text-sm font-medium">{availabilityLabel}</p>
               </div>
-              <div className="space-y-3 text-sm text-[var(--app-muted)]">
-                <p className="inline-flex items-center gap-2">
-                  <Building2 className="h-4 w-4 text-cyan-300" />
-                  {campusName}
-                </p>
-                <p className="inline-flex items-center gap-2">
-                  <MapPinned className="h-4 w-4 text-cyan-300" />
-                  {region}
-                </p>
-                <p className="inline-flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-cyan-300" />
-                  {expert.contactEmail}
-                </p>
-                <p className="inline-flex items-center gap-2">
-                  <Phone className="h-4 w-4 text-cyan-300" />
-                  {expert.contactPhone}
-                </p>
+              <div className="grid gap-3">
+                <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                    {lang === "id" ? "Afiliasi kampus" : "Campus affiliation"}
+                  </p>
+                  <div className="mt-3 space-y-3 text-sm text-[var(--app-fg)]">
+                    <p className="flex items-start gap-3">
+                      <Building2 className="accent-text mt-0.5 h-4 w-4 shrink-0" />
+                      <span>{campusName}</span>
+                    </p>
+                    <p className="flex items-start gap-3 text-[var(--app-muted)]">
+                      <MapPinned className="accent-text mt-0.5 h-4 w-4 shrink-0" />
+                      <span>{region}</span>
+                    </p>
+                  </div>
+                </div>
+                <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                    {lang === "id" ? "Kontak cepat" : "Quick contact"}
+                  </p>
+                  <div className="mt-3 space-y-3 text-sm">
+                    <p className="flex items-start gap-3 text-[var(--app-fg)]">
+                      <Mail className="accent-text mt-0.5 h-4 w-4 shrink-0" />
+                      <span className="break-all">{expert.contactEmail}</span>
+                    </p>
+                    <p className="flex items-start gap-3 text-[var(--app-fg)]">
+                      <Phone className="accent-text mt-0.5 h-4 w-4 shrink-0" />
+                      <span>{expert.contactPhone}</span>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           }

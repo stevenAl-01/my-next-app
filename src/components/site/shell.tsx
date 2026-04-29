@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowRight, Menu, Moon, ShieldCheck, Sun, X } from "lucide-react";
+import { ArrowRight, Menu, ShieldCheck, X } from "lucide-react";
 
 import { BrandMark } from "@/components/site/brand-mark";
 import { useSiteContext } from "@/context/site-context";
@@ -19,28 +19,28 @@ const navConfig = [
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { lang, setLang, theme, setTheme, dict } = useSiteContext();
+  const { lang, setLang, dict } = useSiteContext();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const dark = theme === "dark";
-
   return (
-    <div className="min-h-screen bg-[var(--app-bg)] text-[var(--app-fg)] transition-colors">
+    <div className="min-h-screen overflow-x-hidden bg-[var(--app-bg)] text-[var(--app-fg)] transition-colors">
       <header className="sticky top-0 z-50 border-b border-[var(--app-border)] bg-[var(--app-header)]/95 backdrop-blur-xl">
         <div className="mx-auto w-full max-w-7xl px-4 py-4 lg:px-6">
           <div className="mb-3 flex items-center justify-between rounded-2xl border border-[var(--app-border)] bg-[var(--app-surface)] px-4 py-2 text-xs text-[var(--app-muted)]">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-cyan-300" />
-              <span>{lang === "id" ? "Inisiatif Ketahanan Siber Nasional" : "National Cyber Resilience Initiative"}</span>
+              <ShieldCheck className="accent-text h-4 w-4" />
+              <span className="text-sm">{lang === "id" ? "Inisiatif Ketahanan Siber Nasional" : "National Cyber Resilience Initiative"}</span>
             </div>
-            <span className="hidden sm:inline">{lang === "id" ? "Pilot website untuk kemitraan kampus" : "Sales-ready pilot for campus partnership"}</span>
+            <span className="hidden sm:inline">
+              {lang === "id" ? "Portal jejaring CoE untuk kemitraan kampus" : "CoE network portal for campus partnerships"}
+            </span>
           </div>
 
           <div className="flex items-center justify-between gap-4 rounded-[1.75rem] border border-white/8 bg-black/10 px-4 py-3">
             <Link href="/" className="flex items-center gap-3">
               <BrandMark className="h-11 w-11" />
               <div>
-                <p className="text-[11px] uppercase tracking-[0.24em] text-cyan-300">Cyber CoE Consortium</p>
+                <p className="brand-kicker text-[11px] uppercase tracking-[0.24em]">Cyber CoE Consortium</p>
                 <h1 className="font-heading text-lg font-semibold">{dict.appName}</h1>
               </div>
             </Link>
@@ -53,8 +53,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "text-sm font-medium transition",
-                      active ? "text-cyan-300" : "text-[var(--app-fg)]/80 hover:text-cyan-200",
+                      "text-base font-medium transition",
+                      active ? "nav-link-active" : "nav-link",
                     )}
                   >
                     {dict.nav[item.key]}
@@ -65,21 +65,17 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
             <div className="hidden items-center gap-2 lg:flex">
               <button
-                onClick={() => setTheme(dark ? "light" : "dark")}
-                className="inline-flex items-center gap-2 rounded-full border border-[var(--app-border)] bg-white/5 px-4 py-2 text-xs font-semibold"
-              >
-                {dark ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-                {dark ? dict.common.darkMode : dict.common.lightMode}
-              </button>
-              <button
                 onClick={() => setLang(lang === "id" ? "en" : "id")}
-                className="rounded-full border border-cyan-300/40 bg-cyan-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-cyan-200 hover:bg-cyan-400/20"
+                className="lang-toggle"
+                aria-label={lang === "id" ? "Switch to English" : "Ganti ke Bahasa Indonesia"}
               >
-                {lang === "id" ? "EN" : "ID"}
+                <span className={cn("lang-toggle-thumb", lang === "id" ? "translate-x-0" : "translate-x-[2.05rem]")} />
+                <span className={cn("relative z-10 w-7 text-center font-bold", lang === "id" ? "text-[var(--app-accent-contrast)]" : "text-[var(--app-muted)]")}>ID</span>
+                <span className={cn("relative z-10 w-7 text-center font-bold", lang === "en" ? "text-[var(--app-accent-contrast)]" : "text-[var(--app-muted)]")}>EN</span>
               </button>
               <Link
                 href="/coe-network"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-300 to-blue-400 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-950 shadow-lg shadow-cyan-500/20"
+                className="header-cta"
               >
                 {lang === "id" ? "Mulai Jelajahi" : "Explore Now"}
                 <ArrowRight className="h-3.5 w-3.5" />
@@ -106,8 +102,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
                       className={cn(
-                        "block rounded-xl px-3 py-2 text-sm transition",
-                        active ? "bg-cyan-300 text-slate-950" : "text-[var(--app-fg)] hover:bg-white/5",
+                        "block rounded-xl px-3 py-2 text-base transition",
+                        active ? "mobile-nav-active" : "text-[var(--app-fg)] hover:bg-white/5",
                       )}
                     >
                       {dict.nav[item.key]}
@@ -117,22 +113,18 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               </nav>
               <div className="flex items-center gap-2">
                 <button
-                  onClick={() => setTheme(dark ? "light" : "dark")}
-                  className="inline-flex items-center gap-2 rounded-full border border-[var(--app-border)] bg-white/5 px-4 py-2 text-xs font-semibold"
-                >
-                  {dark ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-                  {dark ? dict.common.darkMode : dict.common.lightMode}
-                </button>
-                <button
                   onClick={() => setLang(lang === "id" ? "en" : "id")}
-                  className="rounded-full border border-cyan-300/40 bg-cyan-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-cyan-200 hover:bg-cyan-400/20"
+                  className="lang-toggle"
+                  aria-label={lang === "id" ? "Switch to English" : "Ganti ke Bahasa Indonesia"}
                 >
-                  {lang === "id" ? "EN" : "ID"}
+                  <span className={cn("lang-toggle-thumb", lang === "id" ? "translate-x-0" : "translate-x-[2.05rem]")} />
+                  <span className={cn("relative z-10 w-7 text-center font-bold", lang === "id" ? "text-[var(--app-accent-contrast)]" : "text-[var(--app-muted)]")}>ID</span>
+                  <span className={cn("relative z-10 w-7 text-center font-bold", lang === "en" ? "text-[var(--app-accent-contrast)]" : "text-[var(--app-muted)]")}>EN</span>
                 </button>
                 <Link
                   href="/coe-network"
                   onClick={() => setMobileOpen(false)}
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-300 to-blue-400 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-slate-950"
+                  className="header-cta"
                 >
                   {lang === "id" ? "Explore" : "Explore"}
                 </Link>
@@ -151,7 +143,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               <div className="flex items-center gap-3">
                 <BrandMark className="h-11 w-11" />
                 <div>
-                  <p className="text-[11px] uppercase tracking-[0.24em] text-cyan-300">Cyber CoE Consortium</p>
+                  <p className="brand-kicker text-[11px] uppercase tracking-[0.24em]">Cyber CoE Consortium</p>
                   <h2 className="font-heading text-lg font-semibold">{dict.appName}</h2>
                 </div>
               </div>
@@ -166,7 +158,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               <h3 className="mb-3 text-sm font-semibold text-[var(--app-fg)]">{lang === "id" ? "Navigasi" : "Navigation"}</h3>
               <div className="space-y-2 text-sm text-[var(--app-muted)]">
                 {navConfig.map((item) => (
-                  <Link key={item.href} href={item.href} className="block hover:text-cyan-200">
+                  <Link key={item.href} href={item.href} className="nav-link block">
                     {dict.nav[item.key]}
                   </Link>
                 ))}
@@ -194,7 +186,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
           <div className="mt-8 flex flex-col gap-3 border-t border-white/8 pt-5 text-sm text-[var(--app-muted)] lg:flex-row lg:items-center lg:justify-between">
             <p>{dict.common.conceptualDisclaimer}</p>
-            <p>{lang === "id" ? "Cyber CoE Consortium Pilot 2026" : "Cyber CoE Consortium Pilot 2026"}</p>
+            <p>{lang === "id" ? "Cyber CoE Consortium 2026" : "Cyber CoE Consortium 2026"}</p>
           </div>
         </div>
       </footer>

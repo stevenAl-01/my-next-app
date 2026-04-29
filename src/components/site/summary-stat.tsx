@@ -14,7 +14,7 @@ export function SummaryStat({
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-3xl font-semibold">{value}</p>
-          <p className="mt-1 text-sm text-[var(--app-muted)]">{label}</p>
+          <p className="mt-1 text-base text-[var(--app-muted)]">{label}</p>
         </div>
         {accent ? <div className="text-cyan-300">{accent}</div> : null}
       </div>

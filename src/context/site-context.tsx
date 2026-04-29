@@ -94,16 +94,16 @@ const dictionary: Record<Language, Dictionary> = {
       candidate: "Kandidat",
       noData: "Belum ada data yang sesuai filter ini.",
       conceptualDisclaimer:
-        "Prototipe ini menggunakan data dummy realistis untuk presentasi konsep.",
+        "Konten dan data pada website ini disusun untuk menggambarkan ekosistem jejaring CoE secara terstruktur.",
       reset: "Reset Filter",
       darkMode: "Mode Gelap",
       lightMode: "Mode Terang",
     },
     landing: {
-      badge: "Nasional CoE Siber",
+      badge: "Jejaring Nasional CoE Siber",
       title: "Masa Depan Ketahanan Siber Kampus Dimulai dari CoE",
       subtitle:
-        "Platform ini dirancang untuk menunjukkan bagaimana perguruan tinggi dapat membangun CoE yang terstruktur, terukur, dan siap berkolaborasi dengan pemerintah maupun industri.",
+        "Bangun Center of Excellence (CoE) yang tangguh dan terukur. Hubungkan potensi akademik dengan sinergi strategis pemerintah dan industri melalui satu platform terintegrasi.",
       ctaNetwork: "Lihat Peta CoE",
       ctaExperts: "Lihat Expert",
       pillarsTitle: "Empat Pilar Platform",
@@ -160,13 +160,13 @@ const dictionary: Record<Language, Dictionary> = {
       candidate: "Candidate",
       noData: "No data matches this filter.",
       conceptualDisclaimer:
-        "This prototype uses realistic dummy data for concept presentation purposes.",
+        "The content and data on this website are structured to illustrate the CoE network ecosystem.",
       reset: "Reset Filters",
       darkMode: "Dark Mode",
       lightMode: "Light Mode",
     },
     landing: {
-      badge: "National Cyber CoE ",
+      badge: "National Cyber CoE Network",
       title: "The Future of Campus Cyber Resilience Starts with CoE",
       subtitle:
         "This platform demonstrates how universities can build structured, measurable CoEs ready to collaborate with government and industry.",

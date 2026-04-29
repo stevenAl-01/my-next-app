@@ -1,26 +1,35 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
   Globe,
   GraduationCap,
+  Handshake,
+  Layers3,
+  NotebookPen,
   Radar,
   ShieldCheck,
+  Star,
   Users,
 } from "lucide-react";
 
 import { useSiteContext } from "@/context/site-context";
+import { MarqueeGallery } from "@/components/site/marquee-gallery";
 
-const faces = [
+const galleryImages = [
   "https://images.pexels.com/photos/3760851/pexels-photo-3760851.jpeg?auto=compress&cs=tinysrgb&w=1200",
   "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=1200",
   "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  "https://images.pexels.com/photos/3775540/pexels-photo-3775540.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  "https://images.pexels.com/photos/1181519/pexels-photo-1181519.jpeg?auto=compress&cs=tinysrgb&w=1200",
 ];
 
 export default function Home() {
   const { dict, lang } = useSiteContext();
+
+  const marqueeImagesA = galleryImages;
+  const marqueeImagesB = [galleryImages[2], galleryImages[3], galleryImages[4], galleryImages[0], galleryImages[1]];
 
   const metrics =
     lang === "id"
@@ -38,27 +47,71 @@ export default function Home() {
   const coePoints =
     lang === "id"
       ? [
-          "Center of Excellence (CoE) adalah pusat unggulan kampus yang mengintegrasikan pendidikan, riset, dan pengabdian dalam bidang ketahanan siber.",
-          "CoE menjadi mesin kolaborasi antar kampus, pemerintah, dan industri untuk menghasilkan solusi keamanan siber yang nyata dan terukur.",
+          {
+            title: "Center of Excellence (CoE) Siber itu apa?",
+            text: "Pusat unggulan kampus yang mengintegrasikan pendidikan, riset, dan pengabdian di bidang ketahanan siber.",
+          },
+          {
+            title: "Fungsi utama",
+            text: "Mesin kolaborasi kampus–pemerintah–industri untuk menghasilkan solusi keamanan siber yang nyata dan terukur.",
+          },
         ]
       : [
-          "A Center of Excellence (CoE) is a university hub integrating education, research, and impact programs in cyber resilience.",
-          "CoE drives collaboration across campuses, government, and industry to deliver measurable cybersecurity outcomes.",
+          {
+            title: "What is a CoE?",
+            text: "A campus hub that integrates education, research, and impact programs in cyber resilience.",
+          },
+          {
+            title: "Why it matters",
+            text: "A collaboration engine across campus, government, and industry to deliver measurable cybersecurity outcomes.",
+          },
         ];
 
   const valuePoints =
     lang === "id"
       ? [
-          "Meningkatkan reputasi kampus sebagai pusat talenta dan inovasi keamanan siber.",
-          "Mempercepat kesiapan kurikulum OBE-SKKNI yang relevan dengan kebutuhan nasional.",
-          "Membuka peluang kemitraan strategis dengan instansi pemerintah dan industri digital.",
-          "Membangun pipeline expert dan talenta yang siap untuk program nasional.",
+          {
+            icon: Star,
+            title: "Reputasi Naik",
+            text: "Perkuat posisi kampus sebagai pusat talenta dan inovasi siber.",
+          },
+          {
+            icon: NotebookPen,
+            title: "OBE-SKKNI Siap",
+            text: "Percepat kesiapan kurikulum yang selaras kebutuhan nasional.",
+          },
+          {
+            icon: Handshake,
+            title: "Mitra Strategis",
+            text: "Buka peluang kemitraan dengan pemerintah dan industri digital.",
+          },
+          {
+            icon: Layers3,
+            title: "Pipeline Terukur",
+            text: "Bangun pipeline expert dan talenta untuk program lintas pihak.",
+          },
         ]
       : [
-          "Strengthens campus positioning as a cybersecurity talent and innovation center.",
-          "Accelerates OBE-SKKNI curriculum readiness aligned with national priorities.",
-          "Unlocks strategic partnerships with public institutions and digital industry.",
-          "Builds an expert and talent pipeline ready for national programs.",
+          {
+            icon: Star,
+            title: "Stronger Reputation",
+            text: "Position campus as a cyber talent and innovation hub.",
+          },
+          {
+            icon: NotebookPen,
+            title: "OBE-SKKNI Ready",
+            text: "Accelerate curriculum alignment with national needs.",
+          },
+          {
+            icon: Handshake,
+            title: "Strategic Partners",
+            text: "Open collaboration with government and digital industry.",
+          },
+          {
+            icon: Layers3,
+            title: "Measurable Pipeline",
+            text: "Expert and talent pipeline ready for national programs.",
+          },
         ];
 
   const pillars =
@@ -114,7 +167,7 @@ export default function Home() {
       : ["For Campuses", "For Government Partners", "For Digital Industry"];
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-8 lg:space-y-10">
       <section className="anim-fade-up relative overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.16),transparent_32%),radial-gradient(circle_at_80%_20%,rgba(34,211,238,0.18),transparent_24%),linear-gradient(145deg,#020617_0%,#0f172a_38%,#082f49_100%)] p-8 shadow-2xl shadow-cyan-900/20 lg:p-10">
         <div className="anim-float absolute -right-20 -top-16 h-56 w-56 rounded-full bg-cyan-400/20 blur-3xl" />
         <div className="anim-float absolute bottom-0 right-20 h-40 w-40 rounded-full bg-blue-500/20 blur-2xl" />
@@ -150,7 +203,7 @@ export default function Home() {
                   className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 backdrop-blur-sm"
                 >
                   <p className="text-2xl font-semibold text-white">{metric.value}</p>
-                  <p className="text-sm text-slate-300">{metric.label}</p>
+                  <p className="text-base text-slate-300">{metric.label}</p>
                 </div>
               ))}
             </div>
@@ -165,12 +218,12 @@ export default function Home() {
               </div>
             </div>
             <div className="absolute right-6 top-12 w-48 rounded-2xl border border-cyan-300/20 bg-slate-900/85 p-4 shadow-xl">
-              <p className="text-xs text-cyan-200">Threat Readiness Index</p>
+              <p className="text-xs text-cyan-200">{lang === "id" ? "Kesiapan Kolaborasi" : "Collaboration Readiness"}</p>
               <p className="mt-1 text-3xl font-semibold text-white">92%</p>
               <p className="mt-2 text-xs text-slate-400">
                 {lang === "id"
-                  ? "Narasi kesiapan nasional untuk presentasi kampus."
-                  : "National readiness narrative for campus presentation."}
+                  ? "Indikator ringkas untuk presentasi dan koordinasi lintas kampus/mitra."
+                  : "A compact indicator for cross-campus/partner coordination."}
               </p>
             </div>
             <div className="absolute bottom-8 left-10 right-10 rounded-3xl border border-cyan-300/15 bg-slate-900/85 p-5 shadow-2xl shadow-cyan-950/20">
@@ -204,98 +257,192 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="anim-fade-up grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
-        <article className="rounded-[1.75rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-6">
+      <section className="anim-fade-up grid gap-4 lg:grid-cols-2 lg:items-stretch">
+        <article className="flex h-full flex-col rounded-[1.75rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-6">
           <div className="mb-4">
             <p className="text-xs uppercase tracking-[0.18em] text-cyan-300">
-              {lang === "id" ? "Narasi Strategis" : "Strategic Narrative"}
+              {lang === "id" ? "Apa Itu CoE" : "What is CoE"}
             </p>
-            <h3 className="mt-2 text-2xl font-semibold">
+            <h3 className="mt-2 text-2xl font-semibold leading-tight md:text-3xl">
               {lang === "id"
-                ? "Mengapa kampus perlu CoE ketahanan siber?"
-                : "Why do campuses need a cyber resilience CoE?"}
+                ? "Pusat unggulan kampus untuk ketahanan siber"
+                : "A campus center of excellence for cyber resilience"}
             </h3>
           </div>
-          <ul className="space-y-3 text-sm text-[var(--app-muted)]">
+          <div className="grid flex-1 content-start gap-3">
             {coePoints.map((point) => (
-              <li key={point} className="rounded-2xl border border-white/8 bg-white/4 p-4">
-                {point}
-              </li>
+              <article
+                key={point.title}
+                className="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-5 transition hover:border-cyan-300/30"
+              >
+                <div className="pointer-events-none absolute -left-12 -top-12 h-28 w-28 rounded-full bg-cyan-400/10 blur-2xl transition group-hover:bg-cyan-400/20" />
+                <h4 className="text-lg font-semibold text-[var(--app-fg)]">{point.title}</h4>
+                <p className="mt-2 text-base leading-7 text-[var(--app-muted)]">{point.text}</p>
+              </article>
             ))}
-          </ul>
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Link href="/coe-network" className="toolbar-primary gap-2">
+              {lang === "id" ? "Buka Peta CoE" : "Open CoE Map"}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link href="/knowledge" className="toolbar-action gap-2">
+              {lang === "id" ? "Lihat Knowledge" : "View Knowledge"}
+            </Link>
+          </div>
         </article>
 
-        <article className="rounded-[1.75rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-6">
+        <article className="flex h-full flex-col rounded-[1.75rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-6">
           <p className="text-xs uppercase tracking-[0.18em] text-cyan-300">
             {lang === "id" ? "Representasi Kampus" : "Campus Representation"}
           </p>
-          <h3 className="mt-2 text-2xl font-semibold">
+          <h3 className="mt-2 text-2xl font-semibold leading-tight md:text-3xl">
             {lang === "id"
-              ? "Wajah ekosistem yang siap berkolaborasi"
+              ? "Gambaran ekosistem yang siap berkolaborasi"
               : "A collaboration-ready ecosystem"}
           </h3>
-          <div className="mt-5 grid gap-3 sm:grid-cols-3">
-            {faces.map((face) => (
-              <div key={face} className="overflow-hidden rounded-[1.25rem] border border-white/8">
-                <Image
-                  src={face}
-                  alt="Ecosystem representation"
-                  width={400}
-                  height={320}
-                  unoptimized
-                  className="h-40 w-full object-cover"
+          <div className="mt-4 overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5">
+            <div className="relative">
+              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[var(--app-surface)] to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[var(--app-surface)] to-transparent" />
+              <div className="space-y-2 p-1.5">
+                <MarqueeGallery
+                  images={marqueeImagesA}
+                  alt="Ecosystem"
+                  className=""
+                  tileClassName="h-[5.5rem] w-[clamp(8.5rem,11.5vw,11rem)] rounded-[1.25rem]"
+                />
+                <MarqueeGallery
+                  images={marqueeImagesB}
+                  reverse
+                  className="opacity-95"
+                  tileClassName="h-[5.5rem] w-[clamp(8.5rem,11.5vw,11rem)] rounded-[1.25rem]"
                 />
               </div>
-            ))}
+            </div>
+          </div>
+          <div className="mt-4 grid gap-3 sm:grid-cols-3">
+            <div className="rounded-[1.25rem] border border-white/10 bg-white/5 p-4">
+              <p className="text-xs uppercase tracking-[0.16em] text-cyan-300">01</p>
+              <p className="mt-2 text-base font-semibold text-[var(--app-fg)]">
+                {lang === "id" ? "Kolaborasi Lintas Kampus" : "Cross-campus Collaboration"}
+              </p>
+            </div>
+            <div className="rounded-[1.25rem] border border-white/10 bg-white/5 p-4">
+              <p className="text-xs uppercase tracking-[0.16em] text-cyan-300">02</p>
+              <p className="mt-2 text-base font-semibold text-[var(--app-fg)]">
+                {lang === "id" ? "Drill dan Mentoring" : "Drill and Mentoring"}
+              </p>
+            </div>
+            <div className="rounded-[1.25rem] border border-white/10 bg-white/5 p-4">
+              <p className="text-xs uppercase tracking-[0.16em] text-cyan-300">03</p>
+              <p className="mt-2 text-base font-semibold text-[var(--app-fg)]">
+                {lang === "id" ? "Kesiapan Talenta" : "Talent Readiness"}
+              </p>
+            </div>
           </div>
         </article>
       </section>
 
-      <section className="anim-fade-up grid gap-4 md:grid-cols-2">
+      <section className="anim-fade-up grid gap-4 lg:grid-cols-2">
         <article className="rounded-[1.75rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-6">
           <p className="text-xs uppercase tracking-[0.18em] text-cyan-300">
-            {lang === "id" ? "Value Untuk Kampus" : "Campus Value"}
+            {lang === "id" ? "Proposisi Nilai Institusi" : "Institution Value Proposition"}
           </p>
           <h3 className="mt-2 text-2xl font-semibold">
             {lang === "id"
-              ? "Empat manfaat paling mudah dipahami pemangku kepentingan"
-              : "Four benefits stakeholders can understand quickly"}
+              ? "Empat pilar manfaat utama bagi seluruh pemangku kepentingan."
+              : "Four core benefit pillars for all stakeholders."}
           </h3>
-          <ul className="mt-5 grid gap-3 text-sm text-[var(--app-muted)]">
-            {valuePoints.map((point) => (
-              <li key={point} className="rounded-2xl border border-white/8 bg-white/4 p-4">
-                {point}
-              </li>
-            ))}
-          </ul>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {valuePoints.map((item) => {
+              const Icon = item.icon;
+              return (
+                <article
+                  key={item.title}
+                  className="group relative h-full overflow-hidden rounded-[1.5rem] border border-white/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4 transition hover:border-cyan-300/30"
+                >
+                  <div className="pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full bg-cyan-400/10 blur-2xl transition group-hover:bg-cyan-400/20" />
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-200">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <h4 className="text-lg font-semibold text-[var(--app-fg)]">{item.title}</h4>
+                      <p className="mt-1 text-base leading-6 text-[var(--app-muted)]">{item.text}</p>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </article>
 
         <article className="rounded-[1.75rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-6">
           <p className="text-xs uppercase tracking-[0.18em] text-cyan-300">
-            {lang === "id" ? "Pilot Outcome" : "Pilot Outcomes"}
+            {lang === "id" ? "Mulai Dari Sini" : "Start Here"}
           </p>
           <h3 className="mt-2 text-2xl font-semibold">
             {lang === "id"
-              ? "Apa yang langsung bisa ditunjukkan ke kampus"
-              : "What can be shown to campuses immediately"}
+              ? "Tiga jalur cepat untuk eksplorasi"
+              : "Three quick paths to explore"}
           </h3>
-          <ul className="mt-5 space-y-3 text-sm text-[var(--app-muted)]">
-            <li className="rounded-2xl border border-white/8 bg-white/4 p-4">
-              {lang === "id"
-                ? "Narasi CoE yang lebih mudah dipresentasikan ke pimpinan kampus."
-                : "A clearer CoE narrative for campus leadership."}
-            </li>
-            <li className="rounded-2xl border border-white/8 bg-white/4 p-4">
-              {lang === "id"
-                ? "Visualisasi pipeline expert dan talent yang lebih meyakinkan."
-                : "A more convincing view of expert and talent pipelines."}
-            </li>
-            <li className="rounded-2xl border border-white/8 bg-white/4 p-4">
-              {lang === "id"
-                ? "Fondasi diskusi untuk produk kampus lanjutan."
-                : "A foundation for a future campus product discussion."}
-            </li>
-          </ul>
+          <div className="mt-5 grid gap-3">
+            <article className="group rounded-[1.5rem] border border-white/10 bg-white/5 p-4 transition hover:border-cyan-300/30">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">
+                {lang === "id" ? "Peta Jejaring" : "Network Map"}
+              </p>
+              <p className="mt-2 text-base text-[var(--app-muted)]">
+                {lang === "id"
+                  ? "Lihat kampus per wilayah dan akses jalur ke expert/talent."
+                  : "Browse campuses by region and jump to experts/talents."}
+              </p>
+              <div className="mt-3">
+                <Link href="/coe-network" className="toolbar-action gap-2">
+                  {lang === "id" ? "Buka CoE Network" : "Open CoE Network"}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </article>
+
+            <article className="group rounded-[1.5rem] border border-white/10 bg-white/5 p-4 transition hover:border-cyan-300/30">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">
+                {lang === "id" ? "Cari Expert/Talent" : "Find Experts/Talents"}
+              </p>
+              <p className="mt-2 text-base text-[var(--app-muted)]">
+                {lang === "id"
+                  ? "Filter cepat untuk pelatihan, pendampingan, atau rekrutmen."
+                  : "Quick filters for training, mentoring, or recruitment."}
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Link href="/experts" className="toolbar-primary gap-2">
+                  {lang === "id" ? "Lihat Expert" : "View Experts"}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link href="/talents" className="toolbar-action gap-2">
+                  {lang === "id" ? "Lihat Talent" : "View Talents"}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </article>
+
+            <article className="group rounded-[1.5rem] border border-white/10 bg-white/5 p-4 transition hover:border-cyan-300/30">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">
+                {lang === "id" ? "Library Resource" : "Resource Library"}
+              </p>
+              <p className="mt-2 text-base text-[var(--app-muted)]">
+                {lang === "id"
+                  ? "Regulasi, kurikulum, dan skenario latihan untuk adopsi cepat."
+                  : "Regulations, curriculum, and exercise scenarios for fast adoption."}
+              </p>
+              <div className="mt-3">
+                <Link href="/knowledge" className="toolbar-action gap-2">
+                  {lang === "id" ? "Buka Knowledge" : "Open Knowledge"}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </article>
+          </div>
         </article>
       </section>
 

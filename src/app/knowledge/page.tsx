@@ -123,19 +123,19 @@ export default function KnowledgePage() {
                     <span className="meta-badge">
                       {categoryMap[item.category]}
                     </span>
-                    <span className="rounded-full border border-white/8 bg-white/4 px-3 py-1 text-xs text-[var(--app-muted)]">
+                    <span className="rounded-full border border-white/8 bg-white/4 px-3 py-1 text-sm text-[var(--app-muted)]">
                       {item.campusId === "national"
                         ? dict.filters.national
                         : campusNameById(item.campusId)}
                     </span>
                   </div>
-                  <h3 className="text-lg font-semibold">{item.title}</h3>
+                  <h3 className="text-xl font-semibold">{item.title}</h3>
                 </div>
               }
               body={
                 <div className="space-y-3">
-                  <p className="text-sm text-[var(--app-muted)]">{item.summary}</p>
-                  <p className="text-xs text-[var(--app-muted)]">
+                  <p className="text-base text-[var(--app-muted)]">{item.summary}</p>
+                  <p className="text-sm text-[var(--app-muted)]">
                     {dict.labels.tags}: {item.tags.join(" • ")}
                   </p>
                 </div>

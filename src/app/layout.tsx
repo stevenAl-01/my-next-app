@@ -7,7 +7,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Konsorsium Ketahanan Siber",
-  description: "jejaring Center of Excellence ketahanan siber kampus.",
+  description: "Website statis untuk jejaring Center of Excellence ketahanan siber kampus.",
 };
 
 export default function RootLayout({

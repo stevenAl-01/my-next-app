@@ -188,8 +188,8 @@ export default function ExpertsPage() {
                       <p className="text-xs uppercase tracking-[0.18em] text-cyan-300">
                         {campusRecord?.region ?? dict.filters.national}
                       </p>
-                      <h3 className="mt-1 text-base font-semibold">{expert.name}</h3>
-                      <p className="mt-1 line-clamp-2 text-sm text-[var(--app-muted)]">{expert.headline}</p>
+                      <h3 className="mt-1 text-lg font-semibold">{expert.name}</h3>
+                      <p className="mt-1 line-clamp-2 text-base text-[var(--app-muted)]">{expert.headline}</p>
                     </div>
                   </div>
                 }
@@ -197,10 +197,10 @@ export default function ExpertsPage() {
                   <div className="space-y-3">
                     <div className="grid gap-3">
                       <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-3 dark:bg-white/5">
-                        <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                        <p className="type-label">
                           {dict.labels.campus}
                         </p>
-                        <p className="mt-2 line-clamp-2 text-sm font-medium">{campusNameById(expert.campusId)}</p>
+                        <p className="mt-2 line-clamp-2 text-base font-medium">{campusNameById(expert.campusId)}</p>
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -214,7 +214,7 @@ export default function ExpertsPage() {
                 }
                 footer={
                   <div className="flex flex-col gap-3 border-t border-[var(--app-border)] pt-4 sm:flex-row sm:items-center sm:justify-between">
-                    <div className="flex flex-wrap gap-3 text-sm text-[var(--app-muted)]">
+                    <div className="flex flex-wrap gap-3 text-base text-[var(--app-muted)]">
                       <span className="inline-flex items-center gap-2">
                         <Award className="h-4 w-4 text-cyan-300" />
                         {expert.skkniStatus === "certified" ? dict.labels.certified : dict.labels.inProgress}

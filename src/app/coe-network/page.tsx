@@ -111,17 +111,17 @@ export default function CoeNetworkPage() {
                     <span className="meta-badge">
                       {dict.common.active}
                     </span>
-                    <span className="rounded-full border border-white/8 bg-white/4 px-3 py-1 text-xs text-[var(--app-muted)]">
+                    <span className="rounded-full border border-white/8 bg-white/4 px-3 py-1 text-sm text-[var(--app-muted)]">
                       {campus.region}
                     </span>
                   </div>
-                  <h3 className="text-lg font-semibold">{campus.name}</h3>
+                  <h3 className="text-xl font-semibold">{campus.name}</h3>
                 </div>
               }
               body={
                 <div className="grid gap-3 sm:grid-cols-2">
                   <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-3 dark:bg-white/5">
-                    <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                    <p className="type-label">
                       {lang === "id" ? "Expert tersedia" : "Available experts"}
                     </p>
                     <p className="mt-2 text-lg font-semibold">
@@ -129,7 +129,7 @@ export default function CoeNetworkPage() {
                     </p>
                   </div>
                   <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-3 dark:bg-white/5">
-                    <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                    <p className="type-label">
                       {lang === "id" ? "Talent tersedia" : "Available talents"}
                     </p>
                     <p className="mt-2 text-lg font-semibold">

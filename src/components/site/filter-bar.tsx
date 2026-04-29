@@ -14,7 +14,7 @@ export function FilterBar({
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <p className="text-xs uppercase tracking-[0.18em] text-cyan-300">{eyebrow}</p>
-          <p className="mt-2 text-sm text-[var(--app-muted)]">
+          <p className="mt-2 text-base text-[var(--app-muted)]">
             Gunakan pencarian dan filter untuk mempersempit direktori dengan cepat.
           </p>
         </div>

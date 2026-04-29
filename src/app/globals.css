@@ -87,15 +87,25 @@
   --app-border: rgba(56, 189, 248, 0.2);
   --app-surface: rgba(15, 23, 42, 0.78);
   --app-header: rgba(2, 6, 23, 0.82);
+  --app-accent: #67e8f9;
+  --app-accent-strong: #22d3ee;
+  --app-accent-contrast: #04111f;
+  --app-accent-soft: rgba(103, 232, 249, 0.12);
+  --app-accent-border: rgba(103, 232, 249, 0.3);
 }
 
 .light {
   --app-bg: #edf2f7;
   --app-fg: #0f172a;
   --app-muted: #475569;
-  --app-border: rgba(30, 41, 59, 0.16);
-  --app-surface: rgba(248, 250, 252, 0.94);
-  --app-header: rgba(226, 232, 240, 0.88);
+  --app-border: rgba(20, 34, 61, 0.16);
+  --app-surface: rgba(247, 250, 252, 0.96);
+  --app-header: rgba(228, 235, 244, 0.94);
+  --app-accent: #1e3a5f;
+  --app-accent-strong: #163457;
+  --app-accent-contrast: #f8fafc;
+  --app-accent-soft: rgba(30, 58, 95, 0.08);
+  --app-accent-border: rgba(30, 58, 95, 0.22);
 }
 
 @layer base {
@@ -104,7 +114,12 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    background: var(--app-bg);
+    color: var(--app-fg);
+  }
+
+  html {
+    font-size: 16px;
   }
 
   h1,
@@ -113,6 +128,11 @@
   h4 {
     @apply font-heading;
   }
+}
+
+html,
+body {
+  overflow-x: hidden;
 }
 
 @keyframes fade-up {
@@ -131,13 +151,46 @@
   50% { transform: translateY(-6px); }
 }
 
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
 @layer components {
+  .type-label {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-[var(--app-muted)];
+  }
+
+  .type-body {
+    @apply text-base text-[var(--app-fg)];
+  }
+
+  .type-muted {
+    @apply text-base text-[var(--app-muted)];
+  }
+
   .chip-btn {
-    @apply rounded-full border border-[var(--app-border)] bg-transparent px-3 py-1.5 text-xs transition hover:border-cyan-300/60 hover:text-cyan-200;
+    @apply rounded-full border border-[var(--app-border)] bg-transparent px-3 py-1.5 text-xs transition;
+    border-color: var(--app-border);
   }
 
   .chip-btn-active {
-    @apply border-cyan-300 bg-cyan-300 text-slate-950;
+    background: var(--app-accent);
+    border-color: var(--app-accent);
+    color: var(--app-accent-contrast);
   }
 
   .anim-fade-up {
@@ -148,31 +201,142 @@
     animation: float-slow 4s ease-in-out infinite;
   }
 
+  .anim-marquee {
+    animation: marquee-left 28s linear infinite;
+  }
+
+  .anim-marquee-reverse {
+    animation: marquee-right 32s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anim-marquee {
+      animation: none;
+      transform: translateX(0);
+    }
+    .anim-marquee-reverse {
+      animation: none;
+      transform: translateX(0);
+    }
+  }
+
   .toolbar-panel {
     @apply rounded-[1.75rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-5 shadow-sm backdrop-blur;
   }
 
   .toolbar-label {
-    @apply text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--app-muted)];
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-[var(--app-muted)];
   }
 
   .toolbar-control {
-    @apply w-full rounded-2xl border border-[var(--app-border)] bg-black/10 px-4 py-3 text-sm text-[var(--app-fg)] outline-none transition placeholder:text-[var(--app-muted)] focus:border-cyan-300/40 focus:ring-2 focus:ring-cyan-300/10 dark:bg-white/5;
+    @apply w-full rounded-2xl border border-[var(--app-border)] bg-black/10 px-4 py-3 text-base text-[var(--app-fg)] outline-none transition placeholder:text-[var(--app-muted)] dark:bg-white/5;
   }
 
   .toolbar-select {
-    @apply w-full appearance-none rounded-2xl border border-[var(--app-border)] bg-black/10 px-4 py-3 pr-10 text-sm text-[var(--app-fg)] outline-none transition focus:border-cyan-300/40 focus:ring-2 focus:ring-cyan-300/10 dark:bg-white/5;
+    @apply w-full appearance-none rounded-2xl border border-[var(--app-border)] bg-black/10 px-4 py-3 pr-10 text-base text-[var(--app-fg)] outline-none transition dark:bg-white/5;
   }
 
   .toolbar-action {
-    @apply inline-flex items-center justify-center rounded-full border border-[var(--app-border)] px-4 py-2.5 text-sm font-medium text-[var(--app-fg)] transition hover:border-cyan-300/40 hover:text-cyan-300;
+    @apply inline-flex items-center justify-center rounded-full border px-4 py-2.5 text-base font-medium transition;
+    background: color-mix(in srgb, var(--app-accent) 6%, transparent);
+    border-color: var(--app-accent-border);
+    color: var(--app-fg);
   }
 
   .toolbar-primary {
-    @apply inline-flex items-center justify-center rounded-full bg-cyan-300 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-cyan-200;
+    @apply inline-flex items-center justify-center rounded-full px-4 py-2.5 text-base font-semibold transition;
+    background: linear-gradient(135deg, var(--app-accent), var(--app-accent-strong));
+    color: var(--app-accent-contrast);
+  }
+
+  .icon-toggle {
+    @apply relative inline-flex h-10 w-[4.25rem] items-center justify-between overflow-hidden rounded-full border border-[var(--app-border)] bg-white/5 px-2 text-[var(--app-fg)] transition;
+  }
+
+  .icon-toggle-thumb {
+    @apply absolute left-1 top-1 h-8 w-8 rounded-full shadow-sm transition-transform duration-300;
+    background: linear-gradient(135deg, var(--app-accent), var(--app-accent-strong));
+  }
+
+  .lang-toggle {
+    @apply relative inline-flex h-10 w-[4.9rem] items-center justify-between overflow-hidden rounded-full border border-[var(--app-border)] bg-white/5 px-2 text-sm uppercase tracking-[0.08em] transition;
+    background: color-mix(in srgb, var(--app-accent) 10%, transparent);
+    border-color: color-mix(in srgb, var(--app-accent) 30%, transparent);
+  }
+
+  .lang-toggle-thumb {
+    @apply absolute left-1 top-1 h-8 w-[2.15rem] rounded-full shadow-sm transition-transform duration-300;
+    background: linear-gradient(135deg, var(--app-accent), var(--app-accent-strong));
   }
 
   .meta-badge {
-    @apply rounded-full border border-cyan-300/20 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-100;
+    @apply rounded-full border px-3 py-1 text-xs;
+    border-color: color-mix(in srgb, var(--app-accent) 24%, transparent);
+    background: color-mix(in srgb, var(--app-accent) 12%, transparent);
+    color: var(--app-accent);
   }
+
+  .brand-kicker {
+    color: var(--app-accent);
+  }
+
+  .accent-text {
+    color: var(--app-accent);
+  }
+
+  .nav-link {
+    color: color-mix(in srgb, var(--app-fg) 82%, transparent);
+  }
+
+  .nav-link:hover {
+    color: var(--app-accent);
+  }
+
+  .nav-link-active {
+    color: var(--app-accent);
+  }
+
+  .header-cta {
+    @apply inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-wide transition;
+    background: linear-gradient(135deg, var(--app-accent), var(--app-accent-strong));
+    color: var(--app-accent-contrast);
+    box-shadow: 0 10px 24px color-mix(in srgb, var(--app-accent) 20%, transparent);
+  }
+
+  .header-cta:hover {
+    filter: brightness(0.97);
+  }
+
+  .mobile-nav-active {
+    background: color-mix(in srgb, var(--app-accent) 100%, transparent);
+    color: var(--app-accent-contrast);
+  }
+
+}
+
+.light .toolbar-control,
+.light .toolbar-select {
+  background: rgba(15, 23, 42, 0.04);
+  color: #0f172a;
+}
+
+.light .icon-toggle,
+.light .lang-toggle {
+  background: rgba(15, 23, 42, 0.05);
+}
+
+.toolbar-control:focus,
+.toolbar-select:focus {
+  border-color: var(--app-accent-border);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--app-accent) 12%, transparent);
+}
+
+.toolbar-action:hover {
+  background: color-mix(in srgb, var(--app-accent) 12%, transparent);
+  border-color: color-mix(in srgb, var(--app-accent) 32%, transparent);
+  color: var(--app-fg);
+}
+
+.toolbar-primary:hover {
+  filter: brightness(0.96);
 }

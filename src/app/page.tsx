@@ -449,7 +449,6 @@ export default function Home() {
       <section className="anim-fade-up rounded-[2rem] border border-cyan-300/20 bg-[radial-gradient(circle_at_top_right,rgba(56,189,248,0.14),transparent_30%),linear-gradient(145deg,rgba(8,47,73,0.85),rgba(2,6,23,0.95))] p-6 lg:p-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl">
-            <p className="text-xs uppercase tracking-[0.18em] text-cyan-300">Closing CTA</p>
             <h3 className="mt-2 text-3xl font-semibold text-white">
               {lang === "id"
                 ? "Tunjukkan bagaimana CoE kampus Anda bisa masuk ke jejaring nasional."
@@ -457,8 +456,8 @@ export default function Home() {
             </h3>
             <p className="mt-3 text-sm text-slate-300">
               {lang === "id"
-                ? "Landing ini dirancang untuk membuka percakapan strategis, bukan hanya menampilkan data."
-                : "This landing is designed to open strategic conversations, not just display data."}
+                ? "Jelajahi jejaring CoE untuk melihat peluang kolaborasi, penguatan kurikulum, dan kesiapan talenta siber."
+                : "Explore the CoE network to uncover collaboration, curriculum, and cyber talent opportunities."}
             </p>
           </div>
           <div className="flex flex-wrap gap-3">

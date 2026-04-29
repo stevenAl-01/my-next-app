@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowUpRight, Award, BadgeCheck, Building2, MapPinned, RotateCcw, Search, ShieldCheck } from "lucide-react";
 
 import { DirectoryCard } from "@/components/site/directory-card";
@@ -17,11 +16,21 @@ import { useSiteContext } from "@/context/site-context";
 
 export default function ExpertsPage() {
   const { dict, campusNameById, lang } = useSiteContext();
-  const searchParams = useSearchParams();
-  const [campus, setCampus] = useState(searchParams.get("campus") ?? "all");
+  const [campus, setCampus] = useState("all");
   const [skill, setSkill] = useState("all");
   const [region, setRegion] = useState("all");
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const campusParam = params.get("campus");
+    if (campusParam) {
+      const frame = window.requestAnimationFrame(() => {
+        setCampus(campusParam);
+      });
+      return () => window.cancelAnimationFrame(frame);
+    }
+  }, []);
 
   const skills = useMemo(
     () => Array.from(new Set(experts.flatMap((expert) => expert.expertise))).sort(),

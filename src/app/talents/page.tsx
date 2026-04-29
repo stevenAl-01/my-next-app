@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowUpRight, BriefcaseBusiness, Building2, MapPinned, Radar, RotateCcw, Search, Sparkles } from "lucide-react";
 
 import { DirectoryCard } from "@/components/site/directory-card";
@@ -16,11 +15,21 @@ import { useSiteContext } from "@/context/site-context";
 
 export default function TalentsPage() {
   const { dict, campusNameById, lang } = useSiteContext();
-  const searchParams = useSearchParams();
-  const [campus, setCampus] = useState(searchParams.get("campus") ?? "all");
+  const [campus, setCampus] = useState("all");
   const [competency, setCompetency] = useState("all");
   const [region, setRegion] = useState("all");
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const campusParam = params.get("campus");
+    if (campusParam) {
+      const frame = window.requestAnimationFrame(() => {
+        setCampus(campusParam);
+      });
+      return () => window.cancelAnimationFrame(frame);
+    }
+  }, []);
 
   const competencies = useMemo(
     () => Array.from(new Set(talents.flatMap((talent) => talent.competency))).sort(),

@@ -100,7 +100,7 @@ const dictionary: Record<Language, Dictionary> = {
       lightMode: "Mode Terang",
     },
     landing: {
-      badge: "Pilot Nasional CoE Siber",
+      badge: "Nasional CoE Siber",
       title: "Masa Depan Ketahanan Siber Kampus Dimulai dari CoE",
       subtitle:
         "Platform ini dirancang untuk menunjukkan bagaimana perguruan tinggi dapat membangun CoE yang terstruktur, terukur, dan siap berkolaborasi dengan pemerintah maupun industri.",
@@ -166,7 +166,7 @@ const dictionary: Record<Language, Dictionary> = {
       lightMode: "Light Mode",
     },
     landing: {
-      badge: "National Cyber CoE Pilot",
+      badge: "National Cyber CoE ",
       title: "The Future of Campus Cyber Resilience Starts with CoE",
       subtitle:
         "This platform demonstrates how universities can build structured, measurable CoEs ready to collaborate with government and industry.",

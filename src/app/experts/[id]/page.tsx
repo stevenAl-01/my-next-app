@@ -31,6 +31,8 @@ export default async function ExpertDetailPage({
       campusName={campus?.name ?? expert.campusId}
       region={getRegionByCampusId(expert.campusId)}
       avatarIndex={avatarIndex}
+      campusContactEmail={campus?.contactEmail}
+      campusContactPhone={campus?.contactPhone}
     />
   );
 }

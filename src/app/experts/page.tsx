@@ -53,6 +53,8 @@ export default function ExpertsPage() {
       expert.name.toLowerCase().includes(term) ||
       expert.headline.toLowerCase().includes(term) ||
       expert.expertise.join(" ").toLowerCase().includes(term) ||
+      (expert.programUnit ?? "").toLowerCase().includes(term) ||
+      (expert.certifications ?? []).join(" ").toLowerCase().includes(term) ||
       campusNameById(expert.campusId).toLowerCase().includes(term) ||
       campusRegion.toLowerCase().includes(term);
 
@@ -201,6 +203,7 @@ export default function ExpertsPage() {
                           {dict.labels.campus}
                         </p>
                         <p className="mt-2 line-clamp-2 text-base font-medium">{campusNameById(expert.campusId)}</p>
+                        <p className="mt-2 line-clamp-2 text-sm text-[var(--app-muted)]">{expert.programUnit}</p>
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -217,7 +220,13 @@ export default function ExpertsPage() {
                     <div className="flex flex-wrap gap-3 text-base text-[var(--app-muted)]">
                       <span className="inline-flex items-center gap-2">
                         <Award className="h-4 w-4 text-cyan-300" />
-                        {expert.skkniStatus === "certified" ? dict.labels.certified : dict.labels.inProgress}
+                        {expert.totStatus === "lulus"
+                          ? lang === "id"
+                            ? "Lulus ToT"
+                            : "ToT passed"
+                          : lang === "id"
+                            ? "Proses ToT"
+                            : "ToT in progress"}
                       </span>
                       <span className="inline-flex items-center gap-2">
                         <Building2 className="h-4 w-4 text-cyan-300" />

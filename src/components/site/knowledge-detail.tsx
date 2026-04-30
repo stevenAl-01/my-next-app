@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, BookOpenText, Building2, FileBadge2, Tags } from "lucide-react";
+import { ArrowLeft, BookOpenText, Building2, FileBadge2, ScanSearch, Wrench } from "lucide-react";
 
 import { DetailHero } from "@/components/site/detail-hero";
 import { DirectoryCard } from "@/components/site/directory-card";
@@ -19,8 +19,18 @@ export function KnowledgeDetail({
   const { dict, lang } = useSiteContext();
   const categoryMap =
     lang === "id"
-      ? { regulation: "Regulasi", curriculum: "Kurikulum", scenario: "Skenario" }
-      : { regulation: "Regulation", curriculum: "Curriculum", scenario: "Scenario" };
+      ? {
+          fundamental: "Fundamental",
+          intermediate: "Intermediate",
+          advanced: "Advanced",
+          management: "Management",
+        }
+      : {
+          fundamental: "Fundamental",
+          intermediate: "Intermediate",
+          advanced: "Advanced",
+          management: "Management",
+        };
 
   return (
     <div className="space-y-6">
@@ -55,9 +65,9 @@ export function KnowledgeDetail({
           accent={<FileBadge2 className="h-5 w-5" />}
         />
         <SummaryStat
-          value={item.tags.length}
-          label={lang === "id" ? "Tag knowledge" : "Knowledge tags"}
-          accent={<Tags className="h-5 w-5" />}
+          value={item.securityDomain ?? "-"}
+          label={lang === "id" ? "Domain keamanan" : "Security domain"}
+          accent={<ScanSearch className="h-5 w-5" />}
         />
         <SummaryStat
           value={campusName}
@@ -81,8 +91,8 @@ export function KnowledgeDetail({
               <p className="text-sm leading-7 text-[var(--app-muted)]">{item.summary}</p>
               <p className="text-sm leading-7 text-[var(--app-muted)]">
                 {lang === "id"
-                  ? "Dokumen ini disusun sebagai contoh resource yang dapat dibagikan lintas kampus untuk mempercepat adopsi kurikulum, tata kelola, atau skenario latihan siber."
-                  : "This document is presented as a shareable example resource to accelerate cross-campus adoption of curriculum, governance, or cyber exercise scenarios."}
+                  ? "Resource ini diposisikan sebagai inventaris kontribusi intelektual CoE: dapat berupa modul ajar, video, lab guide, maupun skenario cyber range."
+                  : "This resource is positioned as part of the CoE intellectual contribution inventory, from teaching modules and videos to lab guides and cyber range scenarios."}
               </p>
             </div>
           }
@@ -112,6 +122,30 @@ export function KnowledgeDetail({
                 </p>
                 <p className="mt-2 text-sm font-medium">{campusName}</p>
               </div>
+              <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                  {lang === "id" ? "Tipe kontribusi" : "Contribution type"}
+                </p>
+                <p className="mt-2 text-sm font-medium">{item.contributionType ?? "-"}</p>
+              </div>
+              <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                  {lang === "id" ? "Kontributor" : "Contributor"}
+                </p>
+                <p className="mt-2 text-sm font-medium">{item.contributor ?? campusName}</p>
+              </div>
+              <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                  {lang === "id" ? "Tanggal update" : "Updated at"}
+                </p>
+                <p className="mt-2 text-sm font-medium">{item.updatedAt ?? "-"}</p>
+              </div>
+              <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                  {lang === "id" ? "Lisensi penggunaan" : "Usage license"}
+                </p>
+                <p className="mt-2 text-sm font-medium">{item.usageLicense ?? "-"}</p>
+              </div>
               <div>
                 <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
                   {dict.labels.tags}
@@ -123,6 +157,22 @@ export function KnowledgeDetail({
                       className="rounded-full border border-cyan-300/20 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-100"
                     >
                       {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                  {lang === "id" ? "Software / tools terkait" : "Related software / tools"}
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {(item.relatedTools ?? []).map((tool) => (
+                    <span
+                      key={tool}
+                      className="rounded-full border border-cyan-300/20 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-100"
+                    >
+                      <Wrench className="mr-1 inline h-3 w-3" />
+                      {tool}
                     </span>
                   ))}
                 </div>

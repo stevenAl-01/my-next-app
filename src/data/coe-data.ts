@@ -7,6 +7,8 @@ export const campuses: Campus[] = [
     region: "DKI Jakarta",
     coeFocus: "Cyber Awareness & Secure Development",
     status: "active",
+    contactEmail: "coe@binus.ac.id",
+    contactPhone: "+62 21 5345830",
   },
   {
     id: "telkomu",
@@ -14,6 +16,8 @@ export const campuses: Campus[] = [
     region: "Jawa Barat",
     coeFocus: "SOC Operations & Cyber Range",
     status: "active",
+    contactEmail: "cybercoe@telkomuniversity.ac.id",
+    contactPhone: "+62 22 7564108",
   },
   {
     id: "umn",
@@ -21,6 +25,8 @@ export const campuses: Campus[] = [
     region: "Banten",
     coeFocus: "AppSec & Digital Forensic Foundations",
     status: "active",
+    contactEmail: "infosec@umn.ac.id",
+    contactPhone: "+62 21 54220808",
   },
   {
     id: "gunadarma",
@@ -28,6 +34,8 @@ export const campuses: Campus[] = [
     region: "Jawa Barat",
     coeFocus: "Network Defense & Incident Handling",
     status: "active",
+    contactEmail: "coe-cyber@gunadarma.ac.id",
+    contactPhone: "+62 21 78881112",
   },
   {
     id: "trisakti",
@@ -35,6 +43,8 @@ export const campuses: Campus[] = [
     region: "DKI Jakarta",
     coeFocus: "Governance & Compliance Readiness",
     status: "active",
+    contactEmail: "cybercenter@trisakti.ac.id",
+    contactPhone: "+62 21 5663232",
   },
   {
     id: "petra",
@@ -42,6 +52,8 @@ export const campuses: Campus[] = [
     region: "Jawa Timur",
     coeFocus: "Cyber Drill Enablement & Blue Team Basics",
     status: "active",
+    contactEmail: "coe@petra.ac.id",
+    contactPhone: "+62 31 2983000",
   },
   {
     id: "uajy",
@@ -49,6 +61,8 @@ export const campuses: Campus[] = [
     region: "DI Yogyakarta",
     coeFocus: "Awareness Program & Institutional Playbooks",
     status: "active",
+    contactEmail: "cyberlab@mail.uajy.ac.id",
+    contactPhone: "+62 274 487711",
   },
   {
     id: "mercubuana",
@@ -56,6 +70,8 @@ export const campuses: Campus[] = [
     region: "DKI Jakarta",
     coeFocus: "Cyber Awareness Operations & Security Culture",
     status: "active",
+    contactEmail: "coe@mercubuana.ac.id",
+    contactPhone: "+62 21 5840816",
   },
   {
     id: "ubsi",
@@ -63,6 +79,8 @@ export const campuses: Campus[] = [
     region: "DKI Jakarta",
     coeFocus: "Digital Forensic Workflow & Triage Support",
     status: "active",
+    contactEmail: "cyber@bsi.ac.id",
+    contactPhone: "+62 21 54376399",
   },
   {
     id: "dinamika",
@@ -70,10 +88,12 @@ export const campuses: Campus[] = [
     region: "Jawa Timur",
     coeFocus: "Cyber Range Scenario & Incident Triage",
     status: "active",
+    contactEmail: "coe@dinamika.ac.id",
+    contactPhone: "+62 31 8721731",
   },
 ];
 
-export const experts: Expert[] = [
+const baseExperts = [
   {
     id: "exp-01",
     name: "Dr. Arif Pratama",
@@ -271,7 +291,7 @@ export const experts: Expert[] = [
   },
 ];
 
-export const talents: Talent[] = [
+const baseTalents = [
   {
     id: "tal-01",
     name: "Aulia Rahman",
@@ -664,7 +684,7 @@ export const talents: Talent[] = [
   },
 ];
 
-export const knowledgeItems: Knowledge[] = [
+const baseKnowledgeItems = [
   {
     id: "kn-01",
     title: "Ringkasan Implementasi UU PDP untuk Perguruan Tinggi",
@@ -846,5 +866,240 @@ export const knowledgeItems: Knowledge[] = [
       "Panduan menyusun program awareness tahunan: target audiens, kalender kampanye, KPI sederhana, dan evaluasi bertahap.",
   },
 ];
+
+const expertProgramUnitByCampus: Record<string, string> = {
+  binus: "School of Information Systems",
+  telkomu: "Fakultas Informatika / Cyber Security Lab",
+  umn: "Program Studi Informatika",
+  gunadarma: "Program Studi Sistem Informasi",
+  trisakti: "Fakultas Teknologi Industri",
+  petra: "Informatika / Security Research Group",
+  uajy: "Program Studi Informatika",
+  mercubuana: "Fakultas Ilmu Komputer",
+  ubsi: "Program Studi Teknologi Informasi",
+  dinamika: "School of Computing",
+};
+
+const expertCertificationMap: Record<string, string[]> = {
+  "exp-01": ["CISSP", "CEH", "BNSP SOC Analyst"],
+  "exp-02": ["CEH", "CHFI", "BNSP Forensik Digital"],
+  "exp-03": ["CISA", "CRISC", "BNSP Auditor Keamanan Informasi"],
+  "exp-04": ["GICSP", "ISO 27001 Lead Implementer", "BNSP"],
+  "exp-05": ["CEH", "Blue Team Level 1", "BNSP"],
+  "exp-06": ["CISSP", "Security Awareness Practitioner", "BNSP"],
+  "exp-07": ["Splunk Core Certified User", "CEH", "BNSP SOC Analyst"],
+  "exp-08": ["CSSLP", "CEH", "BNSP Secure Coding"],
+  "exp-09": ["GCIH", "CEH", "BNSP Incident Response"],
+  "exp-10": ["CISA", "ISO 27001 Lead Auditor", "BNSP"],
+  "exp-11": ["CEH", "Cyber Range Facilitator", "BNSP"],
+  "exp-12": ["CHFI", "CEH", "BNSP Forensik Digital"],
+  "exp-13": ["CCSP", "AWS Security Specialty", "BNSP"],
+  "exp-14": ["CISA", "ISO 27001 Lead Auditor", "BNSP"],
+  "exp-15": ["CISSP", "CEH", "BNSP Keamanan Email"],
+};
+
+const expertProjectMap: Record<string, string> = {
+  "exp-01": "Menyusun alur monitoring SOC kampus dan triage alert untuk operasi harian.",
+  "exp-02": "Pendampingan investigasi insiden dan penyusunan alur akuisisi artefak digital.",
+  "exp-03": "Pemetaan risiko dan kesiapan audit keamanan siber untuk lingkungan perguruan tinggi.",
+  "exp-04": "Penyusunan skenario krisis siber lintas unit dan latihan koordinasi pimpinan.",
+  "exp-05": "Pelaksanaan cyber drill dan evaluasi after-action review untuk tim kampus.",
+  "exp-06": "Rangkaian program awareness, phishing drill, dan onboarding kebijakan siber.",
+  "exp-07": "Implementasi onboarding log, aturan deteksi, dan dashboard monitoring kampus.",
+  "exp-08": "Review secure coding dasar dan hardening aplikasi layanan internal kampus.",
+  "exp-09": "Penyusunan playbook respons insiden dan fasilitasi tabletop exercise.",
+  "exp-10": "Baseline kontrol, evidence compliance, dan roadmap peningkatan tata kelola.",
+  "exp-11": "Desain skenario cyber range dan rubric penilaian latihan teknis.",
+  "exp-12": "Penyusunan chain of custody dan praktik evidence handling untuk kampus.",
+  "exp-13": "Audit baseline IAM, logging, dan konfigurasi cloud untuk layanan kampus.",
+  "exp-14": "Validasi kontrol keamanan dan persiapan audit internal institusi.",
+  "exp-15": "Program pengurangan risiko phishing melalui kontrol email dan edukasi pengguna.",
+};
+
+const talentProgramStudyByCampus: Record<string, string> = {
+  binus: "Informatika",
+  telkomu: "Cyber Security",
+  umn: "Informatika",
+  gunadarma: "Sistem Informasi",
+  trisakti: "Teknik Informatika",
+  petra: "Informatika",
+  uajy: "Teknologi Informasi",
+  mercubuana: "Sistem Informasi",
+  ubsi: "Teknologi Informasi",
+  dinamika: "Cyber Security",
+};
+
+const talentTrainingMap: Record<string, Array<{ label: string; score: string }>> = {
+  "tal-01": [
+    { label: "SOC Monitoring Bootcamp", score: "89" },
+    { label: "National Cyber Drill 2025", score: "91" },
+  ],
+  "tal-02": [
+    { label: "DFIR Foundation Lab", score: "88" },
+    { label: "Cyber Range Petra 2025", score: "90" },
+  ],
+  "tal-03": [
+    { label: "Governance & Compliance Clinic", score: "89" },
+    { label: "BSSN University Challenge 2025", score: "87" },
+  ],
+  "tal-04": [
+    { label: "Crisis Communication Exercise", score: "86" },
+    { label: "Maritime Cyber Tabletop Exercise", score: "89" },
+  ],
+  "tal-05": [
+    { label: "Vulnerability Assessment Lab", score: "90" },
+    { label: "Regional Cyber Drill Bali 2025", score: "88" },
+  ],
+  "tal-06": [
+    { label: "Cyber Awareness Sprint", score: "89" },
+    { label: "Onboarding Security Content Workshop", score: "91" },
+  ],
+  "tal-07": [
+    { label: "SOC Bootcamp Tel-U 2025", score: "92" },
+    { label: "Alert Triage Simulation", score: "89" },
+  ],
+  "tal-08": [
+    { label: "Web Security Lab UMN 2025", score: "88" },
+    { label: "Secure Coding Clinic", score: "87" },
+  ],
+  "tal-09": [
+    { label: "IR Tabletop Gunadarma 2025", score: "89" },
+    { label: "Evidence Checklist Workshop", score: "86" },
+  ],
+  "tal-10": [
+    { label: "GRC Clinic Trisakti 2025", score: "90" },
+    { label: "Risk Register Workshop", score: "88" },
+  ],
+};
+
+const knowledgeCategoryMap: Record<string, Knowledge["category"]> = {
+  "kn-01": "management",
+  "kn-02": "fundamental",
+  "kn-03": "advanced",
+  "kn-04": "intermediate",
+  "kn-05": "advanced",
+  "kn-06": "fundamental",
+  "kn-07": "fundamental",
+  "kn-08": "management",
+  "kn-09": "advanced",
+  "kn-10": "intermediate",
+  "kn-11": "intermediate",
+  "kn-12": "advanced",
+  "kn-13": "management",
+  "kn-14": "advanced",
+  "kn-15": "fundamental",
+  "kn-16": "advanced",
+  "kn-17": "intermediate",
+  "kn-18": "management",
+  "kn-19": "intermediate",
+  "kn-20": "management",
+};
+
+const knowledgeContributionTypeMap: Record<string, string> = {
+  "kn-01": "Modul Ajar (PDF)",
+  "kn-02": "Modul Ajar (PDF)",
+  "kn-03": "Skenario Cyber Range",
+  "kn-04": "Lab Guide",
+  "kn-05": "Skenario Cyber Range",
+  "kn-06": "Video",
+  "kn-07": "Modul Ajar (PDF)",
+  "kn-08": "Modul Ajar (PDF)",
+  "kn-09": "Skenario Cyber Range",
+  "kn-10": "Video",
+  "kn-11": "Lab Guide",
+  "kn-12": "Lab Guide",
+  "kn-13": "Modul Ajar (PDF)",
+  "kn-14": "Lab Guide",
+  "kn-15": "Video",
+  "kn-16": "Skenario Cyber Range",
+  "kn-17": "Modul Ajar (PDF)",
+  "kn-18": "Skenario Cyber Range",
+  "kn-19": "Lab Guide",
+  "kn-20": "Modul Ajar (PDF)",
+};
+
+const knowledgeDomainMap: Record<string, string> = {
+  "kn-01": "ISO 27001",
+  "kn-02": "NIST CSF",
+  "kn-03": "MITRE ATT&CK",
+  "kn-04": "NIST CSF",
+  "kn-05": "MITRE ATT&CK",
+  "kn-06": "NIST CSF",
+  "kn-07": "MITRE ATT&CK",
+  "kn-08": "ISO 27001",
+  "kn-09": "MITRE ATT&CK",
+  "kn-10": "NIST CSF",
+  "kn-11": "MITRE ATT&CK",
+  "kn-12": "MITRE ATT&CK",
+  "kn-13": "NIST CSF",
+  "kn-14": "MITRE ATT&CK",
+  "kn-15": "NIST CSF",
+  "kn-16": "MITRE ATT&CK",
+  "kn-17": "ISO 27001",
+  "kn-18": "NIST CSF",
+  "kn-19": "MITRE ATT&CK",
+  "kn-20": "NIST CSF",
+};
+
+const knowledgeToolsMap: Record<string, string[]> = {
+  "kn-01": ["Spreadsheet", "Policy Template"],
+  "kn-02": ["Curriculum Matrix", "Learning Outcome Map"],
+  "kn-03": ["Wazuh", "TheHive", "MISP"],
+  "kn-04": ["Splunk", "Sysmon", "Wireshark"],
+  "kn-05": ["Tabletop Kit", "Inject Timeline"],
+  "kn-06": ["Slide Deck", "Quiz Form"],
+  "kn-07": ["Poster Kit", "Email Banner"],
+  "kn-08": ["Ticketing", "Mailbox Reporting"],
+  "kn-09": ["SSO Lab", "Phishing Simulator"],
+  "kn-10": ["Simulation Toolkit", "Awareness Portal"],
+  "kn-11": ["Kali Linux", "Wireshark", "Range Guide"],
+  "kn-12": ["Scoring Sheet", "AAR Form"],
+  "kn-13": ["AAR Template", "Lessons Learned Log"],
+  "kn-14": ["Header Analyzer", "Sandbox"],
+  "kn-15": ["Password Manager Demo", "MFA Guide"],
+  "kn-16": ["Endpoint Timeline", "Triage Worksheet"],
+  "kn-17": ["Mail Gateway", "DMARC Checklist"],
+  "kn-18": ["Exercise Brief", "Decision Log"],
+  "kn-19": ["SIEM Dashboard", "Alert Matrix"],
+  "kn-20": ["Campaign Calendar", "KPI Tracker"],
+};
+
+export const experts: Expert[] = baseExperts.map((expert, index) => ({
+  ...expert,
+  nidnOrNip: `1987${String(index + 1).padStart(2, "0")}********${String(1400 + index).slice(-4)}`,
+  programUnit: expertProgramUnitByCampus[expert.campusId],
+  certifications: expertCertificationMap[expert.id] ?? ["SKKNI Keamanan Siber"],
+  totStatus: expert.skkniStatus === "certified" ? "lulus" : "proses",
+  projectExperience: expertProjectMap[expert.id] ?? expert.bioShort,
+  profileReference: `https://pdikti.kemdikbud.go.id/data_dosen/${expert.id}`,
+}));
+
+export const talents: Talent[] = baseTalents.map((talent, index) => ({
+  ...talent,
+  nim: `2026********${String(3100 + index).slice(-4)}`,
+  programStudy: talentProgramStudyByCampus[talent.campusId],
+  academicStatus: talent.availability === "ready" ? "Semester akhir / siap lulus" : "Masih aktif studi",
+  finalScore: talentTrainingMap[talent.id]?.[0]?.score ?? `${88 + (index % 8)}`,
+  trainingScores:
+    talentTrainingMap[talent.id] ??
+    [
+      { label: talent.cyberRangeExp, score: `${88 + (index % 8)}` },
+      { label: `${talent.competency[0] ?? "Cyber Security"} Applied Lab`, score: `${86 + (index % 7)}` },
+    ],
+  internalRanking: index < 6 ? "Top 10%" : index < 15 ? "Top 25%" : "Top 40%",
+  masteredScenario: talent.cyberRangeExp,
+  careerInterest: talent.competency[0] ?? "Cyber Security",
+}));
+
+export const knowledgeItems: Knowledge[] = baseKnowledgeItems.map((item) => ({
+  ...item,
+  category: knowledgeCategoryMap[item.id] ?? "intermediate",
+  contributionType: knowledgeContributionTypeMap[item.id] ?? "Modul Ajar (PDF)",
+  contributor: item.campusId === "national" ? "Jejaring CoE Nasional" : campuses.find((campus) => campus.id === item.campusId)?.name,
+  securityDomain: knowledgeDomainMap[item.id] ?? "NIST CSF",
+  relatedTools: knowledgeToolsMap[item.id] ?? ["Wireshark"],
+  updatedAt: "2026-03-15",
+  usageLicense: item.campusId === "national" ? "Creative Commons" : "Internal Velsicuro",
+}));
 
 export const regions = Array.from(new Set(campuses.map((campus) => campus.region)));

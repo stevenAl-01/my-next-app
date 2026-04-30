@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, BriefcaseBusiness, Building2, Mail, MapPinned, Phone, Radar, Sparkles } from "lucide-react";
+import { ArrowLeft, BriefcaseBusiness, Building2, GraduationCap, Mail, MapPinned, Phone, Radar, Sparkles } from "lucide-react";
 
 import { DetailHero } from "@/components/site/detail-hero";
 import { DirectoryCard } from "@/components/site/directory-card";
 import { SummaryStat } from "@/components/site/summary-stat";
 import { useSiteContext } from "@/context/site-context";
+import { maskEmail, maskIdentifier, maskPhone } from "@/lib/masking";
 import type { Talent } from "@/types/coe";
 
 export function TalentProfile({
@@ -95,8 +96,8 @@ export function TalentProfile({
           accent={<Sparkles className="h-5 w-5" />}
         />
         <SummaryStat
-          value={talent.cyberRangeExp}
-          label={lang === "id" ? "Eksposur latihan" : "Training exposure"}
+          value={talent.trainingScores?.length ?? 0}
+          label={lang === "id" ? "Pelatihan terpetakan" : "Mapped trainings"}
           accent={<Radar className="h-5 w-5" />}
         />
         <SummaryStat
@@ -129,7 +130,7 @@ export function TalentProfile({
           }
           body={
             <div className="space-y-4">
-              <div className="grid gap-3 sm:grid-cols-2">
+              <div id="akademik-talent" className="grid gap-3 sm:grid-cols-2">
                 <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
                   <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
                     {dict.labels.campus}
@@ -138,9 +139,57 @@ export function TalentProfile({
                 </div>
                 <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
                   <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
-                    {dict.labels.cyberRange}
+                    {lang === "id" ? "NIM" : "Student ID"}
                   </p>
-                  <p className="accent-text mt-2 text-sm font-medium">{talent.cyberRangeExp}</p>
+                  <p className="mt-2 text-sm font-medium">{maskIdentifier(talent.nim)}</p>
+                </div>
+                <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                    {lang === "id" ? "Program studi" : "Study program"}
+                  </p>
+                  <p className="mt-2 text-sm font-medium">{talent.programStudy ?? "Tidak tersedia"}</p>
+                </div>
+                <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                    {lang === "id" ? "Semester / status" : "Semester / status"}
+                  </p>
+                  <p className="accent-text mt-2 text-sm font-medium">{talent.academicStatus ?? "Tidak tersedia"}</p>
+                </div>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                    {lang === "id" ? "Nilai akhir pelatihan" : "Final training score"}
+                  </p>
+                  <p className="mt-2 text-sm font-medium">{talent.finalScore ?? "Tidak tersedia"}</p>
+                </div>
+                <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                    {lang === "id" ? "Ranking internal" : "Internal ranking"}
+                  </p>
+                  <p className="mt-2 text-sm font-medium">{talent.internalRanking ?? "Tidak tersedia"}</p>
+                </div>
+                <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                    {lang === "id" ? "Status ketersediaan" : "Availability status"}
+                  </p>
+                  <p className="mt-2 text-sm font-medium">{availabilityLabel}</p>
+                </div>
+              </div>
+              <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                  {lang === "id" ? "Pemetaan nilai per pelatihan" : "Training-to-score mapping"}
+                </p>
+                <div className="mt-3 space-y-3">
+                  {(talent.trainingScores ?? []).map((entry) => (
+                    <div
+                      key={`${entry.label}-${entry.score}`}
+                      className="flex items-start justify-between gap-3 rounded-2xl border border-[var(--app-border)] bg-white/5 px-3 py-3"
+                    >
+                      <p className="text-sm text-[var(--app-fg)]">{entry.label}</p>
+                      <span className="meta-badge shrink-0">{entry.score}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
               <div>
@@ -157,6 +206,18 @@ export function TalentProfile({
                     </span>
                   ))}
                 </div>
+              </div>
+              <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                  {lang === "id" ? "Skenario terkuasai" : "Mastered scenario"}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[var(--app-fg)]">{talent.masteredScenario ?? talent.cyberRangeExp}</p>
+              </div>
+              <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
+                  {lang === "id" ? "Minat karier" : "Career interest"}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[var(--app-fg)]">{talent.careerInterest ?? "Cyber Security"}</p>
               </div>
             </div>
           }
@@ -201,18 +262,22 @@ export function TalentProfile({
                     </p>
                   </div>
                 </div>
-                <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                <div id="kontak-talent" className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
                   <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--app-muted)]">
-                    {lang === "id" ? "Kontak cepat" : "Quick contact"}
+                    {lang === "id" ? "Kontak publik (masked)" : "Public contact (masked)"}
                   </p>
                   <div className="mt-3 space-y-3 text-sm">
                     <p className="flex items-start gap-3 text-[var(--app-fg)]">
                       <Mail className="accent-text mt-0.5 h-4 w-4 shrink-0" />
-                      <span className="break-all">{talent.contactEmail}</span>
+                      <span className="break-all">{maskEmail(talent.contactEmail)}</span>
                     </p>
                     <p className="flex items-start gap-3 text-[var(--app-fg)]">
                       <Phone className="accent-text mt-0.5 h-4 w-4 shrink-0" />
-                      <span>{talent.contactPhone}</span>
+                      <span>{maskPhone(talent.contactPhone)}</span>
+                    </p>
+                    <p className="flex items-start gap-3 text-[var(--app-fg)]">
+                      <GraduationCap className="accent-text mt-0.5 h-4 w-4 shrink-0" />
+                      <span>{maskIdentifier(talent.nim)}</span>
                     </p>
                   </div>
                 </div>

@@ -53,6 +53,8 @@ export default function TalentsPage() {
       talent.headline.toLowerCase().includes(term) ||
       talent.competency.join(" ").toLowerCase().includes(term) ||
       talent.cyberRangeExp.toLowerCase().includes(term) ||
+      (talent.programStudy ?? "").toLowerCase().includes(term) ||
+      (talent.careerInterest ?? "").toLowerCase().includes(term) ||
       campusNameById(talent.campusId).toLowerCase().includes(term);
 
     return byCampus && byComp && byRegion && byQuery;
@@ -204,6 +206,7 @@ export default function TalentsPage() {
                           {dict.labels.campus}
                         </p>
                         <p className="mt-2 line-clamp-2 text-base font-medium">{campusNameById(talent.campusId)}</p>
+                        <p className="mt-2 line-clamp-2 text-sm text-[var(--app-muted)]">{talent.programStudy}</p>
                       </div>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -220,11 +223,11 @@ export default function TalentsPage() {
                     <div className="flex flex-wrap gap-3 text-base text-[var(--app-muted)]">
                       <span className="inline-flex items-center gap-2">
                         <BriefcaseBusiness className="h-4 w-4 text-cyan-300" />
-                        {talent.cyberRangeExp}
+                        {talent.masteredScenario}
                       </span>
                       <span className="inline-flex items-center gap-2">
                         <Building2 className="h-4 w-4 text-cyan-300" />
-                        {availabilityLabel}
+                        {talent.careerInterest ?? availabilityLabel}
                       </span>
                     </div>
                     <Link

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { ArrowUpRight, Building2, MapPinned, RotateCcw, Search, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Building2, Mail, MapPinned, Phone, RotateCcw, Search, ShieldCheck } from "lucide-react";
 
 import { DirectoryCard } from "@/components/site/directory-card";
 import { EmptyState } from "@/components/site/empty-state";
@@ -119,22 +119,37 @@ export default function CoeNetworkPage() {
                 </div>
               }
               body={
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-3 dark:bg-white/5">
-                    <p className="type-label">
-                      {lang === "id" ? "Expert tersedia" : "Available experts"}
-                    </p>
-                    <p className="mt-2 text-lg font-semibold">
-                      {experts.filter((item) => item.campusId === campus.id).length}
-                    </p>
+                <div className="space-y-3">
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-3 dark:bg-white/5">
+                      <p className="type-label">
+                        {lang === "id" ? "Expert tersedia" : "Available experts"}
+                      </p>
+                      <p className="mt-2 text-lg font-semibold">
+                        {experts.filter((item) => item.campusId === campus.id).length}
+                      </p>
+                    </div>
+                    <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-3 dark:bg-white/5">
+                      <p className="type-label">
+                        {lang === "id" ? "Talent tersedia" : "Available talents"}
+                      </p>
+                      <p className="mt-2 text-lg font-semibold">
+                        {talents.filter((item) => item.campusId === campus.id).length}
+                      </p>
+                    </div>
                   </div>
-                  <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-3 dark:bg-white/5">
-                    <p className="type-label">
-                      {lang === "id" ? "Talent tersedia" : "Available talents"}
-                    </p>
-                    <p className="mt-2 text-lg font-semibold">
-                      {talents.filter((item) => item.campusId === campus.id).length}
-                    </p>
+                  <div className="rounded-2xl border border-[var(--app-border)] bg-black/10 p-4 dark:bg-white/5">
+                    <p className="type-label">{lang === "id" ? "Kontak kampus" : "Campus contact"}</p>
+                    <div className="mt-3 space-y-2 text-sm text-[var(--app-fg)]">
+                      <p className="flex items-start gap-3">
+                        <Mail className="accent-text mt-0.5 h-4 w-4 shrink-0" />
+                        <span className="break-all">{campus.contactEmail ?? "-"}</span>
+                      </p>
+                      <p className="flex items-start gap-3">
+                        <Phone className="accent-text mt-0.5 h-4 w-4 shrink-0" />
+                        <span>{campus.contactPhone ?? "-"}</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
               }

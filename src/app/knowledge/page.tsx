@@ -19,9 +19,19 @@ export default function KnowledgePage() {
   const [query, setQuery] = useState("");
 
   const categoryMap =
-    dict.labels.category === "Kategori"
-      ? { regulation: "Regulasi", curriculum: "Kurikulum", scenario: "Skenario" }
-      : { regulation: "Regulation", curriculum: "Curriculum", scenario: "Scenario" };
+    lang === "id"
+      ? {
+          fundamental: "Fundamental",
+          intermediate: "Intermediate",
+          advanced: "Advanced",
+          management: "Management",
+        }
+      : {
+          fundamental: "Fundamental",
+          intermediate: "Intermediate",
+          advanced: "Advanced",
+          management: "Management",
+        };
 
   const items = knowledgeItems.filter((item) => {
     const byCampus = campus === "all" || item.campusId === "national" || item.campusId === campus;
@@ -29,7 +39,9 @@ export default function KnowledgePage() {
     const byQuery =
       query.length === 0 ||
       item.title.toLowerCase().includes(query.toLowerCase()) ||
-      item.tags.join(" ").toLowerCase().includes(query.toLowerCase());
+      item.tags.join(" ").toLowerCase().includes(query.toLowerCase()) ||
+      item.contributionType?.toLowerCase().includes(query.toLowerCase()) ||
+      item.securityDomain?.toLowerCase().includes(query.toLowerCase());
     return byCampus && byCategory && byQuery;
   });
 
@@ -43,13 +55,13 @@ export default function KnowledgePage() {
           accent={<BookOpenText className="h-5 w-5" />}
         />
         <SummaryStat
-          value={items.filter((it) => it.category === "regulation").length}
-          label={categoryMap.regulation}
+          value={items.filter((it) => it.category === "fundamental").length}
+          label={categoryMap.fundamental}
           accent={<FileBadge2 className="h-5 w-5" />}
         />
         <SummaryStat
-          value={items.filter((it) => it.category === "scenario").length}
-          label={categoryMap.scenario}
+          value={items.filter((it) => it.category === "advanced").length}
+          label={categoryMap.advanced}
           accent={<Siren className="h-5 w-5" />}
         />
       </section>
@@ -72,7 +84,7 @@ export default function KnowledgePage() {
         }
       >
         <div className="space-y-2">
-          <p className="toolbar-label">{lang === "id" ? "Cari judul atau tag resource" : "Search title or resource tag"}</p>
+          <p className="toolbar-label">{lang === "id" ? "Cari judul, domain, atau tipe kontribusi" : "Search title, domain, or contribution type"}</p>
           <div className="relative">
             <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--app-muted)]" />
             <input
@@ -99,9 +111,10 @@ export default function KnowledgePage() {
             <p className="toolbar-label">{dict.labels.category}</p>
             <select value={category} onChange={(event) => setCategory(event.target.value)} className="toolbar-select">
               <option value="all">{lang === "id" ? "Semua Kategori" : "All Categories"}</option>
-              <option value="regulation">{categoryMap.regulation}</option>
-              <option value="curriculum">{categoryMap.curriculum}</option>
-              <option value="scenario">{categoryMap.scenario}</option>
+              <option value="fundamental">{categoryMap.fundamental}</option>
+              <option value="intermediate">{categoryMap.intermediate}</option>
+              <option value="advanced">{categoryMap.advanced}</option>
+              <option value="management">{categoryMap.management}</option>
             </select>
           </div>
         </div>
@@ -135,6 +148,9 @@ export default function KnowledgePage() {
               body={
                 <div className="space-y-3">
                   <p className="text-base text-[var(--app-muted)]">{item.summary}</p>
+                  <p className="text-sm text-[var(--app-muted)]">
+                    {lang === "id" ? "Tipe kontribusi" : "Contribution type"}: {item.contributionType}
+                  </p>
                   <p className="text-sm text-[var(--app-muted)]">
                     {dict.labels.tags}: {item.tags.join(" • ")}
                   </p>

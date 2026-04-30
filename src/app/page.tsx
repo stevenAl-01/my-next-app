@@ -180,7 +180,9 @@ export default function Home() {
             <h2 className="max-w-3xl text-3xl font-semibold tracking-tight text-white md:text-5xl">
               {dict.landing.title}
             </h2>
-            <p className="mt-4 max-w-2xl text-slate-300">{dict.landing.subtitle}</p>
+            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300 md:text-lg">
+              {dict.landing.subtitle}
+            </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
                 href="/coe-network"
@@ -206,6 +208,38 @@ export default function Home() {
                   <p className="text-base text-slate-300">{metric.label}</p>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-6 rounded-[1.75rem] border border-cyan-300/20 bg-slate-950/55 p-4 backdrop-blur-sm lg:hidden">
+              <div className="grid gap-4 sm:grid-cols-[0.9fr_1.1fr]">
+                <div className="rounded-2xl border border-cyan-300/20 bg-slate-900/80 p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-cyan-200">National CoE Radar</p>
+                  <div className="mt-4 flex h-28 w-28 items-center justify-center rounded-full border border-cyan-300/15 bg-[radial-gradient(circle,rgba(103,232,249,0.12)_0%,transparent_60%)]">
+                    <Radar className="h-12 w-12 text-cyan-300" />
+                  </div>
+                </div>
+                <div className="space-y-3">
+                  <div className="rounded-2xl border border-cyan-300/20 bg-slate-900/85 p-4">
+                    <p className="text-xs text-cyan-200">
+                      {lang === "id" ? "Kesiapan Kolaborasi" : "Collaboration Readiness"}
+                    </p>
+                    <p className="mt-1 text-3xl font-semibold text-white">92%</p>
+                    <p className="mt-2 text-xs leading-5 text-slate-400">
+                      {lang === "id"
+                        ? "Indikator ringkas untuk presentasi dan koordinasi lintas kampus/mitra."
+                        : "A compact indicator for cross-campus/partner coordination."}
+                    </p>
+                  </div>
+                  <div className="grid gap-2 sm:grid-cols-3">
+                    {trustPoints.map((item, index) => (
+                      <div key={item} className="rounded-2xl border border-white/8 bg-white/5 p-3">
+                        <p className="text-xs uppercase tracking-[0.16em] text-cyan-300">0{index + 1}</p>
+                        <p className="mt-1 text-sm font-medium text-white">{item}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -257,86 +291,86 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="anim-fade-up grid gap-4 lg:grid-cols-2 lg:items-stretch">
-        <article className="flex h-full flex-col rounded-[1.75rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-6">
+      <section className="anim-fade-up grid min-w-0 gap-3 sm:gap-4 lg:grid-cols-2 lg:items-stretch">
+        <article className="flex h-full min-w-0 max-w-full flex-col overflow-hidden rounded-[1.5rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-4 sm:p-5 lg:rounded-[1.75rem] lg:p-6">
           <div className="mb-4">
             <p className="text-xs uppercase tracking-[0.18em] text-cyan-300">
               {lang === "id" ? "Apa Itu CoE" : "What is CoE"}
             </p>
-            <h3 className="mt-2 text-2xl font-semibold leading-tight md:text-3xl">
+            <h3 className="mt-2 text-xl font-semibold leading-tight max-[380px]:text-lg sm:text-2xl md:text-3xl">
               {lang === "id"
                 ? "Pusat unggulan kampus untuk ketahanan siber"
                 : "A campus center of excellence for cyber resilience"}
             </h3>
           </div>
-          <div className="grid flex-1 content-start gap-3">
+          <div className="grid min-w-0 flex-1 content-start gap-3">
             {coePoints.map((point) => (
               <article
                 key={point.title}
-                className="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-5 transition hover:border-cyan-300/30"
+                className="group relative min-w-0 max-w-full overflow-hidden rounded-[1.25rem] border border-white/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4 transition hover:border-cyan-300/30 sm:rounded-[1.5rem] sm:p-5"
               >
                 <div className="pointer-events-none absolute -left-12 -top-12 h-28 w-28 rounded-full bg-cyan-400/10 blur-2xl transition group-hover:bg-cyan-400/20" />
-                <h4 className="text-lg font-semibold text-[var(--app-fg)]">{point.title}</h4>
-                <p className="mt-2 text-base leading-7 text-[var(--app-muted)]">{point.text}</p>
+                <h4 className="text-base font-semibold text-[var(--app-fg)] sm:text-lg">{point.title}</h4>
+                <p className="mt-2 break-words text-sm leading-6 text-[var(--app-muted)] sm:text-base sm:leading-7">{point.text}</p>
               </article>
             ))}
           </div>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Link href="/coe-network" className="toolbar-primary gap-2">
+          <div className="mt-4 flex min-w-0 flex-col gap-2 sm:flex-row sm:flex-wrap">
+            <Link href="/coe-network" className="toolbar-primary w-full max-w-full justify-center gap-2 break-words text-center sm:w-auto">
               {lang === "id" ? "Buka Peta CoE" : "Open CoE Map"}
               <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href="/knowledge" className="toolbar-action gap-2">
+            <Link href="/knowledge" className="toolbar-action w-full max-w-full justify-center gap-2 break-words text-center sm:w-auto">
               {lang === "id" ? "Lihat Knowledge" : "View Knowledge"}
             </Link>
           </div>
         </article>
 
-        <article className="flex h-full flex-col rounded-[1.75rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-6">
+        <article className="flex min-w-0 max-w-full flex-col overflow-hidden rounded-[1.5rem] border border-[var(--app-border)] bg-[var(--app-surface)] p-4 sm:p-5 lg:h-full lg:rounded-[1.75rem] lg:p-6">
           <p className="text-xs uppercase tracking-[0.18em] text-cyan-300">
             {lang === "id" ? "Representasi Kampus" : "Campus Representation"}
           </p>
-          <h3 className="mt-2 text-2xl font-semibold leading-tight md:text-3xl">
+          <h3 className="mt-2 text-xl font-semibold leading-tight max-[380px]:text-lg sm:text-2xl md:text-3xl">
             {lang === "id"
               ? "Gambaran ekosistem yang siap berkolaborasi"
               : "A collaboration-ready ecosystem"}
           </h3>
-          <div className="mt-4 overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5">
-            <div className="relative">
-              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[var(--app-surface)] to-transparent" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[var(--app-surface)] to-transparent" />
-              <div className="space-y-2 p-1.5">
+          <div className="mt-4 min-w-0 max-w-full overflow-hidden rounded-[1.25rem] border border-white/10 bg-white/5 sm:rounded-[1.5rem]">
+            <div className="relative min-w-0 max-w-full">
+              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-6 bg-gradient-to-r from-[var(--app-surface)] to-transparent sm:w-10" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-6 bg-gradient-to-l from-[var(--app-surface)] to-transparent sm:w-10" />
+              <div className="space-y-2 p-1 sm:p-1.5">
                 <MarqueeGallery
                   images={marqueeImagesA}
                   alt="Ecosystem"
                   className=""
-                  tileClassName="h-[5.5rem] w-[clamp(8.5rem,11.5vw,11rem)] rounded-[1.25rem]"
+                  tileClassName="h-[4.25rem] w-[7rem] rounded-[1rem] sm:h-[5rem] sm:w-[8.5rem] sm:rounded-[1.1rem] lg:h-[5.5rem] lg:w-[clamp(8.5rem,11.5vw,11rem)] lg:rounded-[1.25rem]"
                 />
                 <MarqueeGallery
                   images={marqueeImagesB}
                   reverse
                   className="opacity-95"
-                  tileClassName="h-[5.5rem] w-[clamp(8.5rem,11.5vw,11rem)] rounded-[1.25rem]"
+                  tileClassName="h-[4.25rem] w-[7rem] rounded-[1rem] sm:h-[5rem] sm:w-[8.5rem] sm:rounded-[1.1rem] lg:h-[5.5rem] lg:w-[clamp(8.5rem,11.5vw,11rem)] lg:rounded-[1.25rem]"
                 />
               </div>
             </div>
           </div>
-          <div className="mt-4 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-[1.25rem] border border-white/10 bg-white/5 p-4">
+          <div className="mt-4 flex min-w-0 max-w-full gap-2 overflow-x-auto pb-1 sm:grid sm:grid-cols-3 sm:gap-3 sm:overflow-visible sm:pb-0">
+            <div className="min-w-[10.5rem] rounded-[1.1rem] border border-white/10 bg-white/5 p-3 sm:min-w-0 sm:rounded-[1.25rem] sm:p-4">
               <p className="text-xs uppercase tracking-[0.16em] text-cyan-300">01</p>
-              <p className="mt-2 text-base font-semibold text-[var(--app-fg)]">
+              <p className="mt-2 text-sm font-semibold text-[var(--app-fg)] sm:text-base">
                 {lang === "id" ? "Kolaborasi Lintas Kampus" : "Cross-campus Collaboration"}
               </p>
             </div>
-            <div className="rounded-[1.25rem] border border-white/10 bg-white/5 p-4">
+            <div className="min-w-[10.5rem] rounded-[1.1rem] border border-white/10 bg-white/5 p-3 sm:min-w-0 sm:rounded-[1.25rem] sm:p-4">
               <p className="text-xs uppercase tracking-[0.16em] text-cyan-300">02</p>
-              <p className="mt-2 text-base font-semibold text-[var(--app-fg)]">
+              <p className="mt-2 text-sm font-semibold text-[var(--app-fg)] sm:text-base">
                 {lang === "id" ? "Drill dan Mentoring" : "Drill and Mentoring"}
               </p>
             </div>
-            <div className="rounded-[1.25rem] border border-white/10 bg-white/5 p-4">
+            <div className="min-w-[10.5rem] rounded-[1.1rem] border border-white/10 bg-white/5 p-3 sm:min-w-0 sm:rounded-[1.25rem] sm:p-4">
               <p className="text-xs uppercase tracking-[0.16em] text-cyan-300">03</p>
-              <p className="mt-2 text-base font-semibold text-[var(--app-fg)]">
+              <p className="mt-2 text-sm font-semibold text-[var(--app-fg)] sm:text-base">
                 {lang === "id" ? "Kesiapan Talenta" : "Talent Readiness"}
               </p>
             </div>

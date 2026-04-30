@@ -103,7 +103,7 @@ const dictionary: Record<Language, Dictionary> = {
       badge: "Jejaring Nasional CoE Siber",
       title: "Masa Depan Ketahanan Siber Kampus Dimulai dari CoE",
       subtitle:
-        "Bangun Center of Excellence (CoE) yang tangguh dan terukur. Hubungkan potensi akademik dengan sinergi strategis pemerintah dan industri melalui satu platform terintegrasi.",
+        "Platform ini dirancang sebagai bentuk dukungan Velsicuro terhadap Pertahanan Siber pada aspek SDM. Fokus utamanya adalah menjembatani kebutuhan antara penyelenggara negara, sektor industri, dan dunia pendidikan secara integratif.",
       ctaNetwork: "Lihat Peta CoE",
       ctaExperts: "Lihat Expert",
       pillarsTitle: "Empat Pilar Platform",

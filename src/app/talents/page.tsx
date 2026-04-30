@@ -60,11 +60,8 @@ export default function TalentsPage() {
     return byCampus && byComp && byRegion && byQuery;
   });
 
-  const representedCampuses = new Set(items.map((item) => item.campusId)).size;
-  const competencySpread = new Set(items.flatMap((item) => item.competency)).size;
-  const representedRegions = new Set(
-    items.map((item) => campuses.find((campusItem) => campusItem.id === item.campusId)?.region ?? ""),
-  ).size;
+  const mappedTrainingCount = items.reduce((total, talent) => total + (talent.trainingScores?.length ?? 0), 0);
+  const careerInterestSpread = new Set(items.map((item) => item.careerInterest ?? item.competency[0] ?? "")).size;
 
   return (
     <div>
@@ -77,13 +74,13 @@ export default function TalentsPage() {
           accent={<Sparkles className="h-5 w-5" />}
         />
         <SummaryStat
-          value={competencySpread}
-          label={lang === "id" ? "Bidang kompetensi utama" : "Core competency areas"}
+          value={mappedTrainingCount}
+          label={lang === "id" ? "Pelatihan terpetakan" : "Mapped trainings"}
           accent={<Radar className="h-5 w-5" />}
         />
         <SummaryStat
-          value={`${representedCampuses} / ${representedRegions}`}
-          label={lang === "id" ? "Kampus dan wilayah sumber" : "Campus and region coverage"}
+          value={careerInterestSpread}
+          label={lang === "id" ? "Fokus karier utama" : "Core career interests"}
           accent={<MapPinned className="h-5 w-5" />}
         />
       </section>

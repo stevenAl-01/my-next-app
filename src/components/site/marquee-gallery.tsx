@@ -20,7 +20,7 @@ export function MarqueeGallery({
   alt = "Gallery",
   reverse,
   className,
-  tileClassName = "h-[5.25rem] w-[clamp(8.5rem,11.5vw,11rem)] rounded-[1.25rem]",
+  tileClassName = "h-[4.25rem] w-[7rem] rounded-[1rem] sm:h-[5rem] sm:w-[8.5rem] sm:rounded-[1.1rem] lg:h-[5.25rem] lg:w-[clamp(8.5rem,11.5vw,11rem)] lg:rounded-[1.25rem]",
 }: MarqueeGalleryProps) {
   const repeated = useMemo(() => {
     if (images.length === 0) return [];
@@ -28,9 +28,9 @@ export function MarqueeGallery({
   }, [images]);
 
   return (
-    <div className={"overflow-hidden " + (className ?? "")}>
+    <div className={"min-w-0 max-w-full overflow-hidden " + (className ?? "")}>
       <div
-        className={(reverse ? "anim-marquee-reverse" : "anim-marquee") + " flex w-max gap-2 will-change-transform"}
+        className={(reverse ? "anim-marquee-reverse" : "anim-marquee") + " flex w-max max-w-none gap-2 will-change-transform"}
       >
         {repeated.concat(repeated).map((src, idx) => (
           <div

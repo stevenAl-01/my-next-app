@@ -1,5 +1,22 @@
 import type { Campus, Expert, Knowledge, Talent } from "@/types/coe";
 
+type BaseExpert = Omit<
+  Expert,
+  "nidnOrNip" | "programUnit" | "certifications" | "totStatus" | "projectExperience" | "profileReference"
+>;
+
+type BaseTalent = Omit<
+  Talent,
+  "nim" | "programStudy" | "academicStatus" | "finalScore" | "trainingScores" | "internalRanking" | "masteredScenario" | "careerInterest"
+>;
+
+type BaseKnowledge = Omit<
+  Knowledge,
+  "category" | "contributionType" | "contributor" | "securityDomain" | "relatedTools" | "updatedAt" | "usageLicense"
+> & {
+  category: "regulation" | "curriculum" | "scenario";
+};
+
 export const campuses: Campus[] = [
   {
     id: "binus",
@@ -93,7 +110,7 @@ export const campuses: Campus[] = [
   },
 ];
 
-const baseExperts = [
+const baseExperts: BaseExpert[] = [
   {
     id: "exp-01",
     name: "Dr. Arif Pratama",
@@ -291,7 +308,7 @@ const baseExperts = [
   },
 ];
 
-const baseTalents = [
+const baseTalents: BaseTalent[] = [
   {
     id: "tal-01",
     name: "Aulia Rahman",
@@ -684,7 +701,7 @@ const baseTalents = [
   },
 ];
 
-const baseKnowledgeItems = [
+const baseKnowledgeItems: BaseKnowledge[] = [
   {
     id: "kn-01",
     title: "Ringkasan Implementasi UU PDP untuk Perguruan Tinggi",

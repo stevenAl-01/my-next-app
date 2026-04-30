@@ -61,11 +61,8 @@ export default function ExpertsPage() {
     return byCampus && bySkill && byRegion && byQuery;
   });
 
-  const certifiedCount = items.filter((expert) => expert.skkniStatus === "certified").length;
-  const representedCampuses = new Set(items.map((item) => item.campusId)).size;
-  const representedRegions = new Set(
-    items.map((item) => campuses.find((campusItem) => campusItem.id === item.campusId)?.region ?? ""),
-  ).size;
+  const certificationCount = items.reduce((total, expert) => total + (expert.certifications?.length ?? 0), 0);
+  const expertiseSpread = new Set(items.flatMap((item) => item.expertise)).size;
 
   return (
     <div>
@@ -78,13 +75,13 @@ export default function ExpertsPage() {
           accent={<ShieldCheck className="h-5 w-5" />}
         />
         <SummaryStat
-          value={certifiedCount}
-          label={lang === "id" ? "Sudah tersertifikasi SKKNI" : "SKKNI certified"}
+          value={certificationCount}
+          label={lang === "id" ? "Sertifikasi terpetakan" : "Mapped certifications"}
           accent={<BadgeCheck className="h-5 w-5" />}
         />
         <SummaryStat
-          value={`${representedCampuses} / ${representedRegions}`}
-          label={lang === "id" ? "Kampus dan wilayah terwakili" : "Campuses and regions represented"}
+          value={expertiseSpread}
+          label={lang === "id" ? "Bidang spesialisasi utama" : "Core specialization areas"}
           accent={<MapPinned className="h-5 w-5" />}
         />
       </section>
